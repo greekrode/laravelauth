@@ -70,7 +70,7 @@
                             <div class="spacer-lg"></div>
                             
                             <h4>Description</h4>
-                            <p>{{ $user->bio }}</p>
+                            <p>{!! nl2br($user->bio) !!}</p>
                             
                             <hr class="lg">
                             

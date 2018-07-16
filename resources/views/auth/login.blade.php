@@ -79,16 +79,7 @@
                             </form>
                             <hr>
                             <h4 class="text-center">Or with social media</h3>
-                            <form method="POST" action="/insta" aria-label="{{ __('Login') }}" class="text-center">
-                                {{ csrf_field() }}
-                                @if(session()->has('login_error'))
-                                    <div class="alert alert-success">
-                                    {{ session()->get('login_error') }}
-                                    </div>
-                                @endif
-                                @include('partials.socials-icons')
-                            </form>
-
+                            @include('partials.socials-icons')
                         </div>
 
                         <div class="col-md-2"></div>

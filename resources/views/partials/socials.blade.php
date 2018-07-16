@@ -1,5 +1,6 @@
 <div class="row">
-    <div class="col-sm-6 mb-2">
+    <div class="col-md-3"></div>
+    {{-- <div class="col-sm-6 mb-2">
         {!! HTML::icon_link(route('social.redirect',['provider' => 'facebook']), 'fa fa-facebook', 'Facebook', array('class' => 'btn btn-block btn-social btn-facebook')) !!}
     </div>
     <div class="col-sm-6 mb-2">
@@ -16,11 +17,13 @@
     </div>
     <div class="col-sm-6 mb-2">
         {!! HTML::icon_link(route('social.redirect',['provider' => 'twitch']), 'fa fa-twitch', 'Twitch', array('class' => 'btn btn-block btn-social btn-twitch btn-info')) !!}
+    </div> --}}
+    <div class="col-md-6 mb-2 text-center">
+        {!! HTML::icon_link(route('social.redirect',['provider' => 'instagram']), 'fa fa-instagram', 'Instagram', array('class' => 'btn btn-block btn-warning btn-social btn-instagram')) !!}
     </div>
-    <div class="col-sm-6 mb-2">
-        {!! HTML::icon_link(route('social.redirect',['provider' => 'instagram']), 'fa fa-instagram', 'Instagram', array('class' => 'btn btn-block btn-social btn-instagram')) !!}
-    </div>
-    <div class="col-sm-6 mb-2">
+    {{-- <div class="col-sm-6 mb-2">
         {!! HTML::icon_link(route('social.redirect',['provider' => '37signals']), 'fa fa-signal', 'Basecamp', array('class' => 'btn btn-block btn-social btn-basecamp btn-warning')) !!}
-    </div>
+    </div> --}}
+    <div class="col-md-3"></div>
 </div>
+

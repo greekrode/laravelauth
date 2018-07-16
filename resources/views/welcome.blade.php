@@ -67,7 +67,7 @@
                                         </figure>
                                         <div class="job-listing-body">
                                             <h4 class="name"><a href="/influencer">{{ $user->name }}</a></h4>
-                                            <p>{{ $user->bio }}</p>
+                                            <p>{!! nl2br($user->bio) !!}</p>
                                         </div>
                                         <footer class="job-listing-footer">
                                             <ul class="meta">
