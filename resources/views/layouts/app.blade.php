@@ -12,6 +12,7 @@
         <meta name="description" content="">
         <meta name="author" content="Jeremy Kenedy">
         <link rel="shortcut icon" href="/favicon.ico">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
 
         {{-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries --}}
         <!--[if lt IE 9]>
@@ -44,7 +45,7 @@
             window.Laravel = {!! json_encode([
                 'csrfToken' => csrf_token(),
             ]) !!};
-        </script>
+        </script>        
 
         @if (Auth::User() && (Auth::User()->profile) && $theme->link != null && $theme->link != 'null')
             <link rel="stylesheet" type="text/css" href="{{ $theme->link }}">
@@ -76,7 +77,7 @@
 
         {{-- Scripts --}}
         <script src="{{ mix('/js/app.js') }}"></script>
-
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
         @if(config('settings.googleMapsAPIStatus'))
             {!! HTML::script('//maps.googleapis.com/maps/api/js?key='.config("settings.googleMapsAPIKey").'&libraries=places&dummy=.js', array('type' => 'text/javascript')) !!}
         @endif

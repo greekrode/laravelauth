@@ -28,6 +28,7 @@
 <link rel="stylesheet" href='{{ asset('css/theme.css')}}'>
 <link rel="stylesheet" href='{{ asset('css/theme-elements.css')}}'>
 <link rel="stylesheet" href='{{ asset('css/animate.min.css')}}'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
 
 
 

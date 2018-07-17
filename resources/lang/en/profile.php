@@ -46,6 +46,9 @@ return [
     'label-bio' => 'Your bio:',
     'ph-bio'    => 'Enter your bio',
 
+    'label-business_type' => 'Your business type',
+    'ph-business_type'    => 'Enter your business type',
+
     'label-github_username' => 'Your GitHub username:',
     'ph-github_username'    => 'Enter your GitHub username',
 

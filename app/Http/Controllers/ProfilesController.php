@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Profile;
 use App\Models\Theme;
 use App\Models\User;
+use App\Models\Business;
 use App\Notifications\SendGoodbyeEmail;
 use App\Traits\CaptureIpTrait;
 use File;
@@ -113,13 +114,22 @@ class ProfilesController extends Controller
                         ->get();
 
         $currentTheme = Theme::find($user->profile->theme_id);
+        if ($user->profile->business_type_id){
+            $currentBusiness = Business::find($user->profile->business_type_id);
+        }else{
+            $currentBusiness = null;
+        }
 
         $data = [
-            'user'         => $user,
-            'themes'       => $themes,
-            'currentTheme' => $currentTheme,
+            'user'              => $user,
+            'themes'            => $themes,
+            'currentTheme'      => $currentTheme,
+            'currentBusiness'   => $currentBusiness,
+            'business'          => Business::pluck('name','id')->toArray(),
 
         ];
+
+        // dd($data);
 
         return view('profiles.edit')->with($data);
     }
@@ -137,7 +147,7 @@ class ProfilesController extends Controller
     {
         $user = $this->getUserByUsername($username);
 
-        $input = Input::only('theme_id', 'location', 'bio', 'twitter_username', 'facebook_username', 'avatar_status');
+        $input = Input::only('theme_id', 'location', 'bio','business_type_id','twitter_username', 'facebook_username', 'avatar_status');
 
         $ipAddress = new CaptureIpTrait();
 

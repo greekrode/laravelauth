@@ -31,6 +31,7 @@ class Profile extends Model
         'theme_id',
         'location',
         'bio',
+        'business_type_id',
         'twitter_username',
         'facebook_username',
         'user_profile_bg',
@@ -62,5 +63,10 @@ class Profile extends Model
     public function theme()
     {
         return $this->hasOne('App\Models\Theme');
+    }
+    
+    public function business()
+    {
+        return $this->hasMany('App\Model\Business');
     }
 }

@@ -67,7 +67,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="form-group has-feedback {{ $errors->has('theme') ? ' has-error ' : '' }}">
+                                                    {{-- <div class="form-group has-feedback {{ $errors->has('theme') ? ' has-error ' : '' }}">
                                                         {!! Form::label('theme_id', trans('profile.label-theme') , array('class' => 'col-12 control-label')); !!}
                                                         <div class="col-12">
                                                             <select class="form-control" name="theme_id" id="theme_id">
@@ -84,7 +84,7 @@
                                                                 </span>
                                                             @endif
                                                         </div>
-                                                    </div>
+                                                    </div> --}}
                                                     <div class="form-group has-feedback {{ $errors->has('location') ? ' has-error ' : '' }}">
                                                         {!! Form::label('location', trans('profile.label-location') , array('class' => 'col-12 control-label')); !!}
                                                         <div class="col-12">
@@ -105,6 +105,28 @@
                                                             @if ($errors->has('bio'))
                                                                 <span class="help-block">
                                                                     <strong>{{ $errors->first('bio') }}</strong>
+                                                                </span>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group has-feedback {{ $errors->has('business') ? ' has-error ' : '' }}">
+                                                        {!! Form::label('business_type_id', trans('profile.label-business_type') , array('class' => 'col-12 control-label')); !!}
+                                                        <div class="col-12">
+                                                            <select class="form-control" name="business_type_id" id="business_type_id">
+                                                                @if (count($business))
+                                                                    @foreach($business as $key => $b)
+                                                                      <option value="{{ $key }}"
+                                                                        @if ($currentBusiness != null)
+                                                                            {{ $currentBusiness->id == $key ? 'selected="selected"' : '' }}
+                                                                        @endif
+                                                                        >{{ $b }}</option>
+                                                                    @endforeach
+                                                                @endif
+                                                            </select>
+                                                            <span class="glyphicon {{ $errors->has('business') ? ' glyphicon-asterisk ' : ' ' }} form-control-feedback" aria-hidden="true"></span>
+                                                            @if ($errors->has('business'))
+                                                                <span class="help-block">
+                                                                    <strong>{{ $errors->first('business') }}</strong>
                                                                 </span>
                                                             @endif
                                                         </div>
@@ -500,6 +522,27 @@
             }
         }
 
+    </script>
+
+    <script>
+        $("#skills").select2({
+            tags: true,  
+            maximumSelectionLength:5,
+            createTag: function (params) {
+                return {
+                    id: params.term,
+                    text: params.term,
+                    newOption: true
+                }
+            },
+            templateResult: function (data) {
+                var $result = $("<span></span>");
+
+                $result.text(data.text);
+
+                return $result;
+            }
+        });
     </script>
 
 @endsection

@@ -21,6 +21,7 @@ class CreateProfilesTable extends Migration
             $table->foreign('theme_id')->references('id')->on('themes');
             $table->string('location')->nullable();
             $table->text('bio')->nullable();
+            $table->string('business_type_id')->nullable()->references('id')->on('business_types');
             $table->string('followers')->nullable();
             $table->string('following')->nullable();
             $table->string('twitter_username')->nullable();
