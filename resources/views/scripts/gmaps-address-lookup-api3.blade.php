@@ -5,7 +5,10 @@
         if(document.getElementById("location"))
         {
             var input = document.getElementById('location');
-            var options; // = {componentRestrictions: {country: 'us'}};
+            var options = {
+                types : ['(cities)'],
+            }
+            ; // = {componentRestrictions: {country: 'us'}};
             var autocomplete = new google.maps.places.Autocomplete(input, options);
         }
      }//]]>

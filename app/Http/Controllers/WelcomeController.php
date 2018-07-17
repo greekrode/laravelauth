@@ -17,10 +17,13 @@ class WelcomeController extends Controller
     {
         $users = DB::table('users')
                 ->join('profiles' , 'profiles.user_id' , '=' , 'users.id')
-                ->select('users.*' , 'profiles.*')
+                ->join('business_types' , 'business_types.id' , '=' , 'profiles.business_type_id')
+                ->select('users.*' , 'profiles.*','business_types.name as bt_name')
                 ->orderBy('users.created_at','desc')
                 ->take('4')
                 ->get();
+ 
+
         return view('welcome')->with('users',$users);
     }
 }

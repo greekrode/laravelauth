@@ -55,8 +55,12 @@
                                     </ul>
 
                                     <ul class="info" style="font-size:35px !important; display:inline-block !important;">
-                                        <li style="display: inline-block !important"><a href="{{ $user->profile->facebook_username }}" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                                        <li style="display: inline-block !important"><a href="{{ 'https://twitter.com/'.$user->profile->twitter_username }}" target="_blank"> <i class="fa fa-twitter"></i> </a></li>
+                                        @if ($user->profile->facebook_username)
+                                            <li style="display: inline-block !important"><a href="{{ $user->profile->facebook_username }}" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                        @endif
+                                        @if ($user->profile->twitter_username)
+                                            <li style="display: inline-block !important"><a href="{{ 'https://twitter.com/'.$user->profile->twitter_username }}" target="_blank"> <i class="fa fa-twitter"></i> </a></li>
+                                        @endif
                                     </ul>
                                     
 
@@ -64,7 +68,7 @@
                                     
                                     @if (Auth::user()->id == $user->id)
                                         {{-- <a href="{{ 'profile/'.Auth::user()->name.'/edit' }}" class="btn btn-primary btn-lg"><span class="fa fa-cog"></span> Edit Profile</a> --}}
-                                        {!! HTML::icon_link(URL::to('/profile/'.Auth::user()->name.'/edit'), 'fa fa-fw fa-cog', trans('titles.editProfile'), array('class' => 'btn btn-lg btn-danger')) !!}
+                                        {!! HTML::icon_link(URL::to('/profile/'.Auth::user()->name.'/edit'), 'fa fa-fw fa-cog', trans('titles.editProfile'), array('class' => 'btn btn-md btn-danger')) !!}
                                     @else
                                         <a href="#" class="btn btn-success btn-lg"><span class="fa fa-envelope"></span> Send Message</a>
                                     @endif

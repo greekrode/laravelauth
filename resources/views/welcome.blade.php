@@ -71,9 +71,9 @@
                                         </div>
                                         <footer class="job-listing-footer">
                                             <ul class="meta">
-                                                <li class="category">Photographers</li>
-                                                <li class="location"><a href="#">Medan, ID</a></li>
-                                                <li class="date">Posted 1 day ago</li>
+                                                <li class="category">{{ $user->bt_name }}</li>
+                                                <li class="location"><a href="#">{{ $user->location }}</a></li>
+                                                {{-- <li class="date"></li> --}}
                                             </ul>
                                         </footer>
                                     </div>

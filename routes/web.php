@@ -19,8 +19,6 @@ Route::get('/', 'WelcomeController@welcome')->name('welcome');
 // Authentication Routes
 Auth::routes();
 
-Route::resource('influencer', 'InfluencerController');
-
 // Public Routes
 Route::group(['middleware' => ['web', 'activity']], function () {
 
@@ -62,6 +60,10 @@ Route::group(['middleware' => ['auth', 'activated', 'activity', 'twostep']], fun
 
 // Registered, activated, and is current user routes.
 Route::group(['middleware' => ['auth', 'activated', 'currentUser', 'activity', 'twostep']], function () {
+
+    Route::resource('influencer', 'InfluencerController');
+
+    Route::resource('job','JobController');
 
     // User Profile and Account Routes
     Route::resource(

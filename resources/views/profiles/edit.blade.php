@@ -112,17 +112,17 @@
                                                     <div class="form-group has-feedback {{ $errors->has('business') ? ' has-error ' : '' }}">
                                                         {!! Form::label('business_type_id', trans('profile.label-business_type') , array('class' => 'col-12 control-label')); !!}
                                                         <div class="col-12">
-                                                            <select class="form-control" name="business_type_id" id="business_type_id">
-                                                                @if (count($business))
-                                                                    @foreach($business as $key => $b)
-                                                                      <option value="{{ $key }}"
-                                                                        @if ($currentBusiness != null)
-                                                                            {{ $currentBusiness->id == $key ? 'selected="selected"' : '' }}
-                                                                        @endif
-                                                                        >{{ $b }}</option>
-                                                                    @endforeach
-                                                                @endif
-                                                            </select>
+                                                                <select class="form-control" name="business_type_id" id="business_type_id">
+                                                                    @if (count($business))
+                                                                        @foreach($business as $key => $b)
+                                                                        <option value="{{ $key }}"
+                                                                            @if ($currentBusiness != null)
+                                                                                {{ $currentBusiness->id == $key ? 'selected="selected"' : '' }}
+                                                                            @endif
+                                                                            >{{ $b }}</option>
+                                                                        @endforeach
+                                                                    @endif
+                                                                </select>
                                                             <span class="glyphicon {{ $errors->has('business') ? ' glyphicon-asterisk ' : ' ' }} form-control-feedback" aria-hidden="true"></span>
                                                             @if ($errors->has('business'))
                                                                 <span class="help-block">
