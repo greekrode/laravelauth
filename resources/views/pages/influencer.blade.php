@@ -39,15 +39,15 @@
                                         {{ url('http://placehold.it/320x290') }}
                                         @endif
                                         " alt="">
-                                        <img src="" alt="">
                                     </figure>
                                 </div>
                                 <div class="col-md-7">
                                     <h2 class="name">{{ $user->first_name.' '.$user->last_name }}</h2>
                                     <i class="tagline"></i>
                                     <ul class="meta">
-                                        <li>Public Figure</li>
-                                        <li>Open Minded</li>
+                                        @if($currentBusiness != null)
+                                            <li>{{ $currentBusiness->name }}</li>
+                                        @endif
                                     </ul>
                                     <ul class="info">
                                         <li><i class="fa fa-users"></i> Following: {{ $user->profile->following }}</a></li>
@@ -75,6 +75,21 @@
                             
                             <h4>Description</h4>
                             <p>{!! nl2br($user->profile->bio) !!}</p>
+
+                            <hr class="lg">
+                            <h4>Instagram Feeds</h4>
+                            <div class="row">
+                                @foreach ($instagramFeed as $if)
+                                    @if($loop->index  < 8)
+                                    <div class="col-md-3">
+                                            <figure class="alignnone">
+                                                <img src="{{ $if['images']['thumbnail']['url'] }}" class="img-thumbnail">
+                                            <p><i class="fa fa-heart"></i> Likes: {{ $if['likes']['count'] }}</p>
+                                            <p><i class="fa fa-comments"></i> Comments: {{ $if['comments']['count'] }} </p>
+                                    </div>
+                                    @endif
+                                @endforeach
+                            </div>
                             
                         
                             @if ($user->profile->location)

@@ -17,6 +17,7 @@ use Image;
 use jeremykenedy\Uuid\Uuid;
 use Validator;
 use View;
+use Instagram;
 
 class ProfilesController extends Controller
 {
@@ -82,12 +83,29 @@ class ProfilesController extends Controller
         }
 
         $currentTheme = Theme::find($user->profile->theme_id);
+        if($user->profile->business_type_id){
+            $currentBusiness = Business::find($user->profile->business_type_id);
+        }else{
+            $currentBusiness = null;
+        }
+
+        $instagramToken = $user->token;
+        $feedRequest = Instagram::getAuthenticatedRequest(
+            'GET',
+            'https://api.instagram.com/v1/users/self/media/recent',
+            $instagramToken
+        );
+        $client = new \GuzzleHttp\Client();
+        $feedResponse = $client->send($feedRequest);
+        $instagramFeed = json_decode($feedResponse->getBody()->getContents(), true);
+        // dd($instagramFeed['data']);
 
         $data = [
             'user'         => $user,
             'currentTheme' => $currentTheme,
+            'currentBusiness' => $currentBusiness,
+            'instagramFeed' =>$instagramFeed['data'],
         ];
-
 
         return view('pages.influencer')->with($data);
     }

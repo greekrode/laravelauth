@@ -65,8 +65,8 @@ class Profile extends Model
         return $this->hasOne('App\Models\Theme');
     }
     
-    public function business()
-    {
-        return $this->hasMany('App\Model\Business');
-    }
+    // public function business()
+    // {
+    //     return $this->hasMany('App\Models\Business');
+    // }
 }

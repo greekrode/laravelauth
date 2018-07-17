@@ -52,6 +52,7 @@ class SocialController extends Controller
         }
 
         $socialUserObject = Socialite::driver($provider)->user();
+        // dd($socialUserObject);
         $socialUser = null;
 
         // Check if email is already registered
@@ -78,6 +79,7 @@ class SocialController extends Controller
                     $fullname[1] = '';
                 }
                 $username = $socialUserObject->nickname;
+                $token = $socialUserObject->token;
 
                 if ($username == null) {
                     foreach ($fullname as $name) {
@@ -94,7 +96,7 @@ class SocialController extends Controller
                     'last_name'            => $fullname[1],
                     'email'                => $email,
                     'password'             => bcrypt(str_random(40)),
-                    'token'                => str_random(64),
+                    'token'                => $token,
                     'activated'            => true,
                     'signup_sm_ip_address' => $ipAddress->getClientIp(),
                 ]);
