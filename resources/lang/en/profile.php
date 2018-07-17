@@ -52,6 +52,9 @@ return [
     'label-twitter_username' => 'Your Twitter username:',
     'ph-twitter_username'    => 'Enter your Twitter username',
 
+    'label-facebook_username' => 'Your Facebook Profile:',
+    'ph-facebook_username'    => 'Enter your Facebook Link',
+
     // User Account Settings Tab
     'editTriggerAlt'        => 'Toggle User Menu',
     'editAccountTitle'      => 'Account Settings',

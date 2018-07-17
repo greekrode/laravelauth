@@ -32,7 +32,7 @@ class Profile extends Model
         'location',
         'bio',
         'twitter_username',
-        'github_username',
+        'facebook_username',
         'user_profile_bg',
         'avatar',
         'avatar_status',

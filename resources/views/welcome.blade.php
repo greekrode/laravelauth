@@ -57,7 +57,7 @@
                                 <div class="col-xs-6 col-sm-3 col-md-3" data-animation="fadeInLeft" data-animation-delay="0">
                                     <div class="job-listing-box">
                                         <figure class="job-listing-img">
-                                            <a href="{{ action('InfluencerController@show', $user->id) }}"><img src="
+                                            <a href="{{ 'profile/'.$user->name }}"><img src="
                                                 @if ($user->avatar)
                                                 {{ $user->avatar }}
                                                 @else

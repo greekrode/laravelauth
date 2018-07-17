@@ -87,7 +87,8 @@ class ProfilesController extends Controller
             'currentTheme' => $currentTheme,
         ];
 
-        return view('profiles.show')->with($data);
+
+        return view('pages.influencer')->with($data);
     }
 
     /**
@@ -136,7 +137,7 @@ class ProfilesController extends Controller
     {
         $user = $this->getUserByUsername($username);
 
-        $input = Input::only('theme_id', 'location', 'bio', 'twitter_username', 'github_username', 'avatar_status');
+        $input = Input::only('theme_id', 'location', 'bio', 'twitter_username', 'facebook_username', 'avatar_status');
 
         $ipAddress = new CaptureIpTrait();
 

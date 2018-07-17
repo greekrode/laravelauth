@@ -33,8 +33,8 @@
                                 <div class="col-md-5">
                                     <figure class="alignnone">
                                         <img src="
-                                        @if ($user->avatar)
-                                        {{ $user->avatar }}
+                                        @if ($user->profile->avatar_status == 1)
+                                        {{ $user->profile->avatar }}
                                         @else
                                         {{ url('http://placehold.it/320x290') }}
                                         @endif
@@ -50,38 +50,42 @@
                                         <li>Open Minded</li>
                                     </ul>
                                     <ul class="info">
-                                        <li><i class="fa fa-users"></i> Following: {{ $user->following }}</a></li>
-                                        <li><i class="fa fa-users"></i> Followers: {{ $user->followers }}</a></li>
+                                        <li><i class="fa fa-users"></i> Following: {{ $user->profile->following }}</a></li>
+                                        <li><i class="fa fa-users"></i> Followers: {{ $user->profile->followers }}</a></li>
                                     </ul>
 
                                     <ul class="info" style="font-size:35px !important; display:inline-block !important;">
-                                        {{-- <li style="display: inline-block !important"><i class="fa fa-instagram"></i></li> --}}
-                                        <li style="display: inline-block !important"><i class="fa fa-facebook"></i></li>
-                                        <li style="display: inline-block !important"><i class="fa fa-twitter"></i></li>
+                                        <li style="display: inline-block !important"><a href="{{ $user->profile->facebook_username }}" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                        <li style="display: inline-block !important"><a href="{{ 'https://twitter.com/'.$user->profile->twitter_username }}" target="_blank"> <i class="fa fa-twitter"></i> </a></li>
                                     </ul>
                                     
 
                                     <div class="spacer-lg"></div>
-                            
-                                    <a href="#" class="btn btn-success btn-lg"><span class="fa fa-envelope"></span> Send Message</a>
+                                    
+                                    @if (Auth::user()->id == $user->id)
+                                        {{-- <a href="{{ 'profile/'.Auth::user()->name.'/edit' }}" class="btn btn-primary btn-lg"><span class="fa fa-cog"></span> Edit Profile</a> --}}
+                                        {!! HTML::icon_link(URL::to('/profile/'.Auth::user()->name.'/edit'), 'fa fa-fw fa-cog', trans('titles.editProfile'), array('class' => 'btn btn-lg btn-danger')) !!}
+                                    @else
+                                        <a href="#" class="btn btn-success btn-lg"><span class="fa fa-envelope"></span> Send Message</a>
+                                    @endif
                                 </div>
                             </div>
 
                             <div class="spacer-lg"></div>
                             
                             <h4>Description</h4>
-                            <p>{!! nl2br($user->bio) !!}</p>
+                            <p>{!! nl2br($user->profile->bio) !!}</p>
                             
+                        
+                            @if ($user->profile->location)
                             <hr class="lg">
-                            
                             <h4>Location</h4>
-                            @if ($user->location)
-										{{ $user->location }} <br />
+										{{ $user->profile->location }} <br />
 
 										@if(config('settings.googleMapsAPIStatus'))
 											Latitude: <span id="latitude"></span> / Longitude: <span id="longitude"></span> <br />
                                             
-											<div id="map-canvas" style="clear:both; height:200px"></div>
+											<div id="map-canvas" style="clear:both; height:300px"></div>
 										@endif
 								@endif
                             <!-- Google Map / End -->
@@ -130,6 +134,7 @@
 
 
                     </div>
+
 
                     <!-- Sidebar -->
                     <aside class="sidebar col-md-3 col-md-offset-1 col-bordered">
@@ -331,14 +336,14 @@ window.onload=function(){
  }//]]>
 </script>
 
-@if ($user && $user->location)
+@if ($user && $user->profile->location)
 
 	<script type="text/javascript">
 
 		function google_maps_geocode_and_map() {
 
 			var geocoder = new google.maps.Geocoder();
-			var address = '{{$user->location}}';
+			var address = '{{$user->profile->location}}';
 
 			geocoder.geocode( { 'address': address}, function(results, status) {
 

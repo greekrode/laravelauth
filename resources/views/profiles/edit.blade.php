@@ -121,14 +121,14 @@
                                                             @endif
                                                         </div>
                                                     </div>
-                                                    <div class="margin-bottom-2 form-group has-feedback {{ $errors->has('github_username') ? ' has-error ' : '' }}">
-                                                        {!! Form::label('github_username', trans('profile.label-github_username') , array('class' => 'col-12 control-label')); !!}
+                                                    <div class="form-group has-feedback {{ $errors->has('facebook_username') ? ' has-error ' : '' }}">
+                                                        {!! Form::label('facebook_username', trans('profile.label-facebook_username') , array('class' => 'col-12 control-label')); !!}
                                                         <div class="col-12">
-                                                            {!! Form::text('github_username', old('github_username'), array('id' => 'github_username', 'class' => 'form-control', 'placeholder' => trans('profile.ph-twitter_username'))) !!}
+                                                            {!! Form::text('facebook_username', old('facebook_username'), array('id' => 'facebook_username', 'class' => 'form-control', 'placeholder' => trans('profile.ph-facebook_username'))) !!}
                                                             <span class="glyphicon glyphicon-pencil form-control-feedback" aria-hidden="true"></span>
-                                                            @if ($errors->has('github_username'))
+                                                            @if ($errors->has('facebook_username'))
                                                                 <span class="help-block">
-                                                                    <strong>{{ $errors->first('github_username') }}</strong>
+                                                                    <strong>{{ $errors->first('facebook_username') }}</strong>
                                                                 </span>
                                                             @endif
                                                         </div>
