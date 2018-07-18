@@ -13,8 +13,7 @@
             <div class="col-md-6">
                 <ul class="breadcrumb">
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="#">Pet Sitters</a></li>
-                    <li class="active">Post a Job</li>
+                    <li class="active">Post an Endorsement</li>
                 </ul>
             </div>
         </div>
@@ -31,10 +30,15 @@
                 <!-- Job Form -->
                 <form action="{{ route('job.store') }}" method="post" id="submit-job-form" class="job-manager-form" enctype="multipart/form-data">
                 @csrf
+                @if(session()->has('message'))
+                    <div class="alert alert-success">
+                    {{ session()->get('message') }}
+                    </div>
+                @endif
 
                     <!-- Job Information Fields -->
                     <fieldset class="fieldset-title">
-                        {!! Form::label('title', 'Job Title' , array('class' => 'col-12 control-label')); !!}
+                        {!! Form::label('title', 'Endorsement Title' , array('class' => 'col-12 control-label')); !!}
                         <div class="field">
                             {!! Form::text('title', old('title'), array('id' => 'title', 'class' => 'form-control', 'placeholder' => 'Enter the job title')) !!}
                             @if ($errors->has('title'))
@@ -46,7 +50,7 @@
                     </fieldset>
 
                     <fieldset class="fieldset-title">
-                        {!! Form::label('location', 'Job Location', array('class' => 'col-12 control-label')); !!}
+                        {!! Form::label('location', 'Endorsement Location', array('class' => 'col-12 control-label')); !!}
                         <div class="field">
                             {!! Form::text('location', old('location'), array('id' => 'location', 'class' => 'form-control', 'placeholder' => 'Enter the job location')) !!}
                             @if ($errors->has('location'))
@@ -64,6 +68,7 @@
                                 <label for="job_category">Product Category</label>
                                 <div class="field select-style">
                                     <select class="form-control" name="category_type_id" id="category_type_id">
+                                        <option></option>
                                         @if (count($category))
                                             @foreach($category as $key => $c)
                                               <option value="{{ $key }}">{{ $c }}</option>
@@ -76,9 +81,9 @@
                     </div>
 
                     <fieldset class="fieldset-job_description">
-                        {!! Form::label('description', 'Product description' , array('class' => 'col-12 control-label')); !!}
+                        {!! Form::label('description', 'Endorsement Description' , array('class' => 'col-12 control-label')); !!}
                         <div class="field">
-                            {!! Form::textarea('description', old('description'), array('id' => 'description', 'class' => 'form-control', 'placeholder' => 'Write the job description')) !!}
+                            {!! Form::textarea('description', old('description'), array('id' => 'description', 'class' => 'form-control', 'placeholder' => 'Describe the endorsement in detail.')) !!}
                             @if ($errors->has('description'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('description') }}</strong>
@@ -87,20 +92,26 @@
                         </div>
                     </fieldset>
 
-                    <fieldset class="fieldset-application">
-                        <label for="application">Price</label>
+                    <fieldset class="fieldset-price">
+                        {!! Form::label('price', 'Endorsement Fee' , array('class' => 'col-12 control-label')); !!}
                         <div class="field">
-                            <input type="text" class="form-control" name="application" id="application" placeholder="Enter an email address or website URL" />
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1">Rp</span>
+                                {!! Form::number('price', old('price'), array('id' => 'price', 'class' => 'form-control', 'placeholder' => 'Endorsement fee' , 'aria-describedby' => 'basic-addon1', 'data-a-dec' => ',', 'data-a-sep' => '.')) !!}
+                                @if ($errors->has('price'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('price') }}</strong>
+                                </span>
+                            @endif
+                            </div>
                         </div>
                     </fieldset>
 
-                    <fieldset class="fieldset-company_logo">
-                        <label for="company_logo">Photo <small>(optional)</small></label>
-                        <div class="field">
-                            <input type="file" class="form-control" name="company_logo" id="company_logo" />
+                    <fieldset class="fieldset-photos">
+                        <label for="photos">Photos <small>(may attach more than one)</small></label>
+                            {!! Form::file('photos[]', array('id' => 'photos', 'class' => 'form-control', 'multiple' => 'true')) !!}
                             <small class="description">
-                            Max. file size: 32 MB.</small>
-                        </div>
+                            Upload only image</small>
                     </fieldset>
 
                     <div class="spacer"></div>
@@ -116,5 +127,10 @@
 
     </div>
 </section>
+<script>
+    jQuery(function($) {
+      $('#price').autoNumeric('init');    
+  });
+</script>
 <!-- Page Content / End -->
 @stop

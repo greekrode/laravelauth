@@ -106,10 +106,10 @@
                     </li>
                     <li><a href="#">Business Owners</a>
                         <ul>
-                            <li><a href="/post_job">Post a Job</a></li>
-                            <li><a href="job-list.html">Business List</a></li>
+                            <li><a href="/job/create">Post an Endorsement</a></li>
+                            <li><a href="job-list.html">Endorsement List</a></li>
                             <li><a href="job-dashboard.html">Dashboard</a></li>
-                            <li><a href="job-profile.html">Profile</a></li>
+                            {{-- <li><a href="job-profile.html">Profile</a></li> --}}
                         </ul>
                     </li>
                     <li><a href="blog-right-sidebar.html">Blog</a>
@@ -145,10 +145,9 @@
                 </li>
                 <li><a href="#">Business Owners</a>
                     <ul>
-                        <li><a href="job-post-job.html">Post a Job</a></li>
-                        <li><a href="job-list.html">Business List</a></li>
+                        <li><a href="/job/create">Post an Endorsement</a></li>
+                        <li><a href="/job">Endorsement List</a></li>
                         <li><a href="job-dashboard.html">Dashboard</a></li>
-                        <li><a href="job-profile.html">Profile</a></li>
                     </ul>
                 </li>
                 <li><a href="blog-right-sidebar.html">Blog</a>

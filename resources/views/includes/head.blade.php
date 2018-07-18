@@ -34,6 +34,8 @@
 
 <!-- Head Libs -->
 <script src='{{ asset('vendor/modernizr.js')}}'></script>
+<script src="{{ asset('vendor/jquery-1.11.0.min.js') }}"></script>
+<script src="{{ asset('js/autoNumeric.js') }}"></script>
 
 <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>

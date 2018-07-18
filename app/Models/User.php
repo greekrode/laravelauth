@@ -92,6 +92,11 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\Profile')->withTimestamps();
     }
 
+    public function jobs()
+    {
+        return $this->belongsToMany('App\Models\Job')->withTimestamps();
+    }
+
     public function hasProfile($name)
     {
         foreach ($this->profiles as $profile) {

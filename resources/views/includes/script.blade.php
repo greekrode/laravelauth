@@ -1,4 +1,3 @@
-<script src="{{ asset('vendor/jquery-1.11.0.min.js') }}"></script>
 <script src="{{ asset('vendor/jquery-migrate-1.2.1.min.js') }}"></script>
 <script src="{{ asset('vendor/bootstrap.js') }}"></script>
 <script src="{{ asset('vendor/jquery.flexnav.min.js') }}"></script>

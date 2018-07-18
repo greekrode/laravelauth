@@ -17,6 +17,8 @@ class AppServiceProvider extends ServiceProvider
     {
         //Paginator::useBootstrapThree();
         Schema::defaultStringLength(191);
+
+        
     }
 
     /**

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Job;
+use App\Models\Photo;
+use Auth;
 
 class JobController extends Controller
 {
@@ -13,14 +16,8 @@ class JobController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $category = Category::pluck('name','id')->toArray();
-        
-        $data = [
-            'category' => $category
-        ];
-        return view('pages.post_job')->with($data);
-
+    {   
+        return view('pages.job_list');
     }
 
     /**
@@ -30,7 +27,12 @@ class JobController extends Controller
      */
     public function create()
     {
-        //
+        $category = Category::pluck('name','id')->toArray();
+        
+        $data = [
+            'category' => $category
+        ];
+        return view('pages.post_job')->with($data);
     }
 
     /**
@@ -41,7 +43,43 @@ class JobController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $validated = $this->validate($request, [
+            'title' => 'required',
+            'description' => 'required',
+            'category_type_id' => 'required'
+        ]);
+
+
+        if($request->hasFile('photos') )
+        {
+            $allowedfileExtension = ['jpg', 'png'];
+            $files = $request->file('photos');
+            
+            $jobs = Job::create([
+                'title' => $request->title,
+                'location' => $request->location,
+                'category_id' => $request->category_type_id,
+                'user_id' => Auth::user()->id,
+                'description' => $request->description,
+                'price' => $request->price
+            ]);
+
+            foreach ($files as $file){
+                $filename = $file->getClientOriginalName();                
+                $extension = $file->getClientOriginalExtension();
+                $check = in_array($extension,$allowedfileExtension);
+            }
+            
+            if ($check){
+                foreach ($request->photos as $photo){
+                    $filename = $photo->store('photos');
+                    $photos = Photo::create([
+                        'endorsement_id' => $jobs->id,
+                        'image' => $filename,
+                    ]);
+                }
+            }
+        }
     }
 
     /**
