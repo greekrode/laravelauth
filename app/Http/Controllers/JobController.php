@@ -7,6 +7,9 @@ use App\Models\Category;
 use App\Models\Job;
 use App\Models\Photo;
 use Auth;
+use App\Models\User;
+use App\Models\Profile;
+use Carbon\Carbon;
 
 class JobController extends Controller
 {
@@ -90,7 +93,47 @@ class JobController extends Controller
      */
     public function show($id)
     {
-        //
+        try {
+            $job = $this->getJobById($id);
+            $user = $this->getUserById($job->user_id);
+            $photos = Photo::where('endorsement_id', $job->id)
+                        ->get();
+        } catch (ModelNotFoundException $exception) {
+            abort(404);
+        }
+
+        $today = Carbon::today('Asia/Jakarta');
+        $diff = $today->diffInHours($job->created_at);
+        if ($diff > 24){
+            $diff = $today->diffInDays($job->created_at).' days';
+        }else{
+            if ($today->diffInMinutes($job->created_at) > 60 ){
+                $diff = $diff.' hours';
+            }else{
+                $diff = $today->diffInMinutes($job->created_at).' minutes';
+            }
+        }
+
+        $data = [
+            'job' => $job,
+            'photos' => $photos,
+            'user' => $user,
+            'diff' => $diff,
+        ];
+
+        // dd($photos);
+
+        return view ('pages.job_profile')->with($data);
+    }
+
+    public function getUserById($id)
+    {
+        return User::with('profile')->whereId($id)->firstOrFail();
+    }
+
+    public function getJobById($id)
+    {
+        return Job::find($id)->firstOrFail();
     }
 
     /**

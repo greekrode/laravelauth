@@ -104,7 +104,7 @@ class ProfilesController extends Controller
             'user'         => $user,
             'currentTheme' => $currentTheme,
             'currentBusiness' => $currentBusiness,
-            'instagramFeed' =>$instagramFeed['data'],
+            'instagramFeed' => $instagramFeed['data'],
         ];
 
         return view('pages.influencer')->with($data);
