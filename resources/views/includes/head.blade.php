@@ -28,6 +28,7 @@
 <link rel="stylesheet" href='{{ asset('css/theme.css')}}'>
 <link rel="stylesheet" href='{{ asset('css/theme-elements.css')}}'>
 <link rel="stylesheet" href='{{ asset('css/animate.min.css')}}'>
+<link rel="stylesheet" href='{{ asset('css/magnifier.css') }}'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
 
 
@@ -36,7 +37,8 @@
 <script src='{{ asset('vendor/modernizr.js')}}'></script>
 <script src="{{ asset('vendor/jquery-1.11.0.min.js') }}"></script>
 <script src="{{ asset('js/autoNumeric.js') }}"></script>
-
+<script src="{{ asset('js/magnifier.js') }}"></script>
+<script src="{{ asset('js/event.js') }}"></script>
 <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <script src='{{ asset('vendor/respond.min.js')}}'></script>

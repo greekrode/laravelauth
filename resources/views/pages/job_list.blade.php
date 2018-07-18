@@ -58,25 +58,30 @@
 						</form>
 
 						<ul class="job_listings">
+							@foreach($jobs as $job)
 							<li class="job_listing">
 								<a href="#">
-									<img src="http://placehold.it/58x58" alt="" class="company_logo">
+									<img src="{{ $job->user->profile->avatar }}" alt="" class="company_logo">
 									<div class="position">
-										<h3>Debbie Bidart</h3>
+										<h2>{{ $job->title }}</h3>
 										<div class="company">
-											<strong>Pet Sitter</strong>
+											<strong>{{ nl2br($job->description) }}</strong>
 										</div>
 									</div>
 									<div class="location">
 										<i class="fa fa-map-marker"></i> Melbourne, AU
 									</div>
-									<ul class="meta">
+									{{-- <ul class="meta">
 										<li class="date">
 											Posted 2 months ago
 										</li>
+									</ul> --}}
+									<ul class="meta">
+										<li><h3>Rp {{ number_format($job->price , 0) }}</h3></li>
 									</ul>
 								</a>
 							</li>
+							@endforeach
 							<li class="job_listing">
 								<a href="#">
 									<img src="http://placehold.it/58x58" alt="" class="company_logo">

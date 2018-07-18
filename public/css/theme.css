@@ -2261,6 +2261,30 @@ body.bg1 {
 .comment-respond .reply-title {
   margin-bottom: .5em;
 }
+
+/*
+// #Endorse Carousel
+// --------------------------------------------------
+*/
+
+#endorseCarousel .item img{
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+#endorseCarousel .item{
+  margin: 3px;
+  padding: 50px;
+  transition: transform .2s; 
+  width: 250px;
+  height: 250px;
+}
+
+#endorseCarousel .item:hover {
+  transform: scale(1.8);
+}
+
 /*
 // #Portfolio
 // --------------------------------------------------

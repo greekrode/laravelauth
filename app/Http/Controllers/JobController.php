@@ -20,7 +20,9 @@ class JobController extends Controller
      */
     public function index()
     {   
-        return view('pages.job_list');
+        $jobs = Job::all();
+
+        return view('pages.job_list')->with('jobs', $jobs);
     }
 
     /**

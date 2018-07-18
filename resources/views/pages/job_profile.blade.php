@@ -29,7 +29,7 @@
                         
                         <div class="job-profile-info">
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-8">
                                     <h2 class="name">{{ $job->title }}</h2>
                                     <span class="tagline" style="font-style:italic;"><i class="fa fa-user"></i> Posted by: {{ $user->first_name.' '.$user->last_name }}</span>
                                     {{-- <ul class="meta">
@@ -44,18 +44,21 @@
                                     <div class="spacer-lg"></div>
                         
                                 </div>
+                                <div class="col-md-4">
+                                    <a href="#" class="btn btn-success btn-md"><span class="fa fa-check"></span> Endorse this</a>
+                                </div>
                             </div>
 
-                            <div class="spacer-lg"></div>
+                            <div class="spacer-xs"></div>
                             
                             <div class="row">
+                                <div id="endorseCarousel">
                                 @foreach ($photos as $photo)
-                                <div class="col-md-3">
-                                        {{-- <figure class="alignnone">
-                                        </figure> --}}
-                                        <img src="{{ asset('storage/'.$photo->image) }}" class="img-thumbnail" style="width:150px !important; height:150px !important">
-                                </div>
+                                    <div class="item" >
+                                        <img class="lazyOwl" data-src="{{ asset('storage/'.$photo->image) }}" alt="Image">
+                                    </div>
                                 @endforeach
+                                </div>                                
                             </div>
 
                             <div class="spacer-lg"></div>
@@ -67,228 +70,25 @@
                         
                             
                             <hr class="lg">
-                            
-                            <div class="row">
-                                <div class="col-sm-4 col-md-4">
-                                    <h4>Skills</h4>
-                                    <div class="list list__arrow2">
-                                        <ul>
-                                            <li>Dog Walking</li> 
-                                            <li>Pet Feeding</li> 
-                                            <li>Pet Sitting</li>
-                                            <li>Boarding</li> 
-                                            <li>Overnight Care</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-4">
-                                    <h4>Experience</h4>
-                                    <div class="list list__arrow2">
-                                        <ul>
-                                            <li>Dogs</li> 
-                                            <li>Cats</li> 
-                                            <li>Fish</li>
-                                            <li>Lizards/Reptiles</li>
-                                            <li>Small Mammals</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-4">
-                                    <h4>Education</h4>
-                                    <div class="list list__arrow2">
-                                        <ul>
-                                            <li>
-                                                University of California, Berkeley<br>
-                                                <span class="date text-muted"><i class="fa fa-calendar"></i> Jan 2009 - Mar 2010</span>
-                                                <div class="position">Bachelor degree</div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
+                        
 
                     </div>
 
                     <!-- Sidebar -->
-                    <aside class="sidebar col-md-3 col-md-offset-1 col-bordered">
-                        <hr class="visible-sm visible-xs lg">
-                        <!-- Widget :: Recent Jobs -->
-                        <div class="widget_recent_jobs widget widget__sidebar">
-                            <h3 class="widget-title">Pet Sitting Jobs</h3>
-                            <div class="widget-content">
-                                <ul class="job_listings">
-                                    <li>
-                                        <a href="#">
-                                            <div class="position">
-                                                <h3>Dog Walker Needed</h3>
-                                            </div>
-                                            <ul class="meta">
-                                                <li class="location">
-                                                    Anywhere
-                                                </li>
-                                                <li class="company">
-                                                    Sara White
-                                                </li>
-                                                <li class="job-type">
-                                                    Pet Sitter
-                                                </li>
-                                            </ul>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <div class="position">
-                                                <h3>Seeking reliable pet sitter for 2</h3>
-                                            </div>
-                                            <ul class="meta">
-                                                <li class="location">
-                                                    London, UK
-                                                </li>
-                                                <li class="company">
-                                                    John Doe
-                                                </li>
-                                                <li class="job-type">
-                                                    Pet Sitter
-                                                </li>
-                                            </ul>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <div class="position">
-                                                <h3>Pet sitter needed for one dog</h3>
-                                            </div>
-                                            <ul class="meta">
-                                                <li class="location">
-                                                    Fayetteville, NC
-                                                </li>
-                                                <li class="company">
-                                                    Bill Russell
-                                                </li>
-                                                <li class="job-type">
-                                                    Pet Sitter
-                                                </li>
-                                            </ul>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <div class="position">
-                                                <h3>Seeking reliable pet sitter for 2</h3>
-                                            </div>
-                                            <ul class="meta">
-                                                <li class="location">
-                                                    Varina, NC
-                                                </li>
-                                                <li class="company">
-                                                    Timothy Black
-                                                </li>
-                                                <li class="job-type">
-                                                    Pet Sitter
-                                                </li>
-                                            </ul>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <div class="position">
-                                                <h3>Dog owner looking to walk/sit for dog</h3>
-                                            </div>
-                                            <ul class="meta">
-                                                <li class="location">
-                                                    Sanford, NC
-                                                </li>
-                                                <li class="company">
-                                                    Eddy Merry
-                                                </li>
-                                                <li class="job-type">
-                                                    Pet Sitter
-                                                </li>
-                                            </ul>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <div class="position">
-                                                <h3>Seeking reliable pet sitter for 2</h3>
-                                            </div>
-                                            <ul class="meta">
-                                                <li class="location">
-                                                    Apex, NC
-                                                </li>
-                                                <li class="company">
-                                                    Sara White
-                                                </li>
-                                                <li class="job-type">
-                                                    Pet Sitter
-                                                </li>
-                                            </ul>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <div class="position">
-                                                <h3>Local Dog Walking and Pet Services</h3>
-                                            </div>
-                                            <ul class="meta">
-                                                <li class="location">
-                                                    London, UK
-                                                </li>
-                                                <li class="company">
-                                                    Allen O’Neal
-                                                </li>
-                                                <li class="job-type">
-                                                    Dog Walking
-                                                </li>
-                                            </ul>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <div class="position">
-                                                <h3>Pet sitter, Dog walker, &amp; more!</h3>
-                                            </div>
-                                            <ul class="meta">
-                                                <li class="location">
-                                                    Morrisville, NC
-                                                </li>
-                                                <li class="company">
-                                                    Tim Purple
-                                                </li>
-                                                <li class="job-type">
-                                                    Petsitter
-                                                </li>
-                                            </ul>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <div class="position">
-                                                <h3>Seeking reliable pet sitter for 2</h3>
-                                            </div>
-                                            <ul class="meta">
-                                                <li class="location">
-                                                    London, UK
-                                                </li>
-                                                <li class="company">
-                                                    Sara White
-                                                </li>
-                                                <li class="job-type">
-                                                    Petsitter
-                                                </li>
-                                            </ul>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- /Widget :: Recent Jobs -->
-                    </aside>
-                    <!-- Sidebar / End -->
 
                 </div>
             </div>
         </section>
+        
+        <script>     
+        $(document).ready(function() {      
+          $("#endorseCarousel").owlCarousel({
+                autoPlay: 3000, //Set AutoPlay to 3 seconds
+                items : 4,
+                itemsDesktop : [1199,3],
+                itemsDesktopSmall : [979,3],
+                lazyLoad : true,
+            });  
+        });
+        </script>
 @stop
