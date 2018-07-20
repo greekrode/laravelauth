@@ -21,6 +21,9 @@ class CreateBidsTable extends Migration
             $table->text('description');
             $table->integer('job_id')->unsigned();
             $table->foreign('job_id')->references('id')->on('jobs')->onDelete('cascade');
+            $table->integer('accept')->default(0);
+            $table->integer('reject')->default(0);
+            $table->integer('done')->default(0);
             $table->timestamps();
         });
     }

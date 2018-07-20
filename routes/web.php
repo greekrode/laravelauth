@@ -81,6 +81,12 @@ Route::group(['middleware' => ['auth', 'activated', 'currentUser', 'activity', '
             ],
         ]
     );
+
+    Route::get('profile/{id}/showId', [
+        'as'   => '{id}',
+        'uses' => 'ProfilesController@showId',
+    ]);
+
     Route::put('profile/{username}/updateUserAccount', [
         'as'   => '{username}',
         'uses' => 'ProfilesController@updateUserAccount',

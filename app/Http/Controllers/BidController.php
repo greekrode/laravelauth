@@ -6,6 +6,7 @@ use App\Models\Bid;
 use App\Models\Job;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Auth;
 
 class BidController extends Controller
 {
@@ -16,7 +17,14 @@ class BidController extends Controller
      */
     public function index()
     {
-        //
+        $jobs = Job::where('user_id',Auth::user()->id)->get();
+        $bids = Bid::all();
+        $data = [
+            'jobs' => $jobs,
+            'bids' => $bids,
+        ];
+
+        return view('pages.job_dashboard')->with($data);
     }
 
     /**
@@ -60,9 +68,24 @@ class BidController extends Controller
      * @param  \App\Bid  $bid
      * @return \Illuminate\Http\Response
      */
-    public function show(Bid $bid)
+    public function show($id)
     {
-        //
+        $job = $this->getJobById($id);
+        $bids = Bid::where('job_id',$job->id)->get();
+
+        $data = [
+            'job' => $job,
+            'bids' => $bids,
+        ];
+
+        // dd($bids['1']->user->profile);
+
+        return view('pages.bidder')->with($data);
+    }
+
+    public function getJobById($id)
+    {
+        return Job::find($id)->firstOrFail();
     }
 
     /**

@@ -29,4 +29,9 @@ class Job extends Model
     {
         return $this->belongsTo('App\Models\User');
     }
+
+    public function bids()
+    {
+        return $this->hasMany('App\Models\Bid');
+    }
 }

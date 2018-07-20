@@ -99,7 +99,7 @@ class User extends Authenticatable
 
     public function bids()
     {
-        return $this->belongsToMany('App\Models\Bid')->withTimestamps();
+        return $this->hasMany('App\Models\Bid');
     }
 
     public function hasProfile($name)

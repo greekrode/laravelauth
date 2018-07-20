@@ -25,7 +25,7 @@
                             <li><a href="/register"><i class="fa-pencil-square-o fa"></i> Register</a></li>
                             <li><a href="/login"><i class="fa-lock fa"></i> Login</a></li>
                         @else
-                            {{-- <li><a href="{{ url('/home') }}">Home</a></li> --}}
+                            <li><a href="{{ url('/home') }}">Bid Status</a></li>
                             <li><a class="{{ Request::is('profile/'.Auth::user()->name, 'profile/'.Auth::user()->name . '/edit') ? 'active' : null }}" href="{{ url('/profile/'.Auth::user()->name) }}">
                                 @lang('titles.profile')
                             </a></li>
@@ -147,7 +147,7 @@
                     <ul>
                         <li><a href="/job/create">Post an Endorsement</a></li>
                         <li><a href="/job">Endorsement List</a></li>
-                        <li><a href="job-dashboard.html">Dashboard</a></li>
+                        <li><a href="/bid">Dashboard</a></li>
                     </ul>
                 </li>
                 <li><a href="blog-right-sidebar.html">Blog</a>
