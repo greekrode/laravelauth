@@ -23,6 +23,53 @@
         <!-- Page Content -->
         <section class="page-content">
             <div class="container">
+                    @if(session()->has('message'))
+                        <div class="alert alert-success">
+                            {{ session()->get('message') }}
+                        </div>
+                    @endif
+                <div class="row" id="bid" style="display:none;">
+                    <div class="content col-md-8">
+                        <div class="card">
+                            <div class="container">
+                                    <h1>Bid on this project</h1>
+                                    <form action="{{ route('bid.store') }}" method="post" id="bid-form" class="job-manager-form" >
+                                    @csrf
+
+                                        <input type="hidden" id="job_id" name="job_id" value="{{ $job->id }}">
+                                        <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}">
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h4>{!! Form::label('expected', 'Time to finished', array('class' => 'col-6 control-label')); !!}</h4>
+                                                <select class="col-6 form-control" name="expected" id="expected">
+                                                    @for ($i = 0; $i < 31; $i++)
+                                                        <option value="{{ $i }}">{{ $i.' days' }}</option>
+                                                    @endfor
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                    <h4>{!! Form::label('description', 'Why we should choose you?', array('class' => 'col-6 control-label')); !!}</h4>
+                                                    {!! Form::textarea('description', old('description'), array('id' => 'description', 'class' => 'form-control', 'placeholder' => 'Tell us why.')) !!}
+                                            </div>
+                                        </div>
+
+                                        <div class="spacer"></div>
+                                        <div class="row">
+                                            <div class="col-md-6"></div>
+                                            <div class="col-md-2">
+                                                <input type="submit" name="submit" class="btn btn-success btn-md" value="Bid Now &rarr;">
+                                            </div>
+                                        </div>
+                                        
+                                    </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="row">
                     <div class="content col-md-8">
@@ -45,7 +92,7 @@
                         
                                 </div>
                                 <div class="col-md-4">
-                                    <a href="#" class="btn btn-success btn-md"><span class="fa fa-check"></span> Endorse this</a>
+                                    <button href="" class="btn btn-success btn-md" onclick="showBid()" id="endorse"><span class="fa fa-check"></span> Endorse this</button>
                                 </div>
                             </div>
 
@@ -90,5 +137,22 @@
                 lazyLoad : true,
             });  
         });
+        </script>
+
+        <script>
+            // function showBid() {
+            //     var x = document.getElementById("bid");
+            //     if (x.style.display == "none") {
+            //         x.style.display = "block";
+            //     } else {
+            //         x.style.display = "none";
+            //     }
+            // }
+
+            $(document).ready(function(){
+                $("#endorse").click(function(){
+                    $("#bid").toggle(1000);
+                });
+            });
         </script>
 @stop

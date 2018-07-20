@@ -1,4 +1,4 @@
-@extends('layouts.default')
+ @extends('layouts.default')
 @section('content')
 	<div class="main" role="main">
 
@@ -24,6 +24,11 @@
 			<section class="page-content">
 				<div class="container">
 					
+						@if(session()->has('message'))
+							<div class="alert alert-success">
+								{{ session()->get('message') }}
+							</div>
+						@endif
 					<div class="job_listings">
 						<form class="job_filters">
 
@@ -60,16 +65,17 @@
 						<ul class="job_listings">
 							@foreach($jobs as $job)
 							<li class="job_listing">
-								<a href="#">
+								<a href="{{ 'job/'.$job->id }}">
 									<img src="{{ $job->user->profile->avatar }}" alt="" class="company_logo">
 									<div class="position">
 										<h2>{{ $job->title }}</h3>
 										<div class="company">
-											<strong>{{ nl2br($job->description) }}</strong>
+											<strong>{!! nl2br($job->description) !!}</strong>
 										</div>
 									</div>
 									<div class="location">
-										<i class="fa fa-map-marker"></i> Melbourne, AU
+										<i class="fa fa-hourglass"></i> {{ date('d-m-Y', strtotime($job->created_at)) }}<br>
+										<i class="fa fa-user"></i> {{ $job->user->first_name.' '.$job->user->last_name }}
 									</div>
 									{{-- <ul class="meta">
 										<li class="date">
@@ -82,120 +88,6 @@
 								</a>
 							</li>
 							@endforeach
-							<li class="job_listing">
-								<a href="#">
-									<img src="http://placehold.it/58x58" alt="" class="company_logo">
-									<div class="position">
-										<h3>John Doe</h3>
-										<div class="company">
-											<strong>Dog Walker</strong>
-										</div>
-									</div>
-									<div class="location">
-										<i class="fa fa-map-marker"></i> New York, US
-									</div>
-									<ul class="meta">
-										<li class="date">
-											Posted 2 months ago
-										</li>
-									</ul>
-								</a>
-							</li>
-							<li class="job_listing job_position_featured">
-								<a href="#">
-									<img src="http://placehold.it/58x58" alt="" class="company_logo">
-									<div class="position">
-										<h3>Carolina White</h3>
-										<div class="company">
-											<strong>Pet Sitter</strong>
-										</div>
-									</div>
-									<div class="location">
-										<i class="fa fa-map-marker"></i> Sydney, AU
-									</div>
-									<ul class="meta">
-										<li class="date">
-											Posted 2 months ago
-										</li>
-									</ul>
-								</a>
-							</li>
-							<li class="job_listing">
-								<a href="#">
-									<img src="http://placehold.it/58x58" alt="" class="company_logo">
-									<div class="position">
-										<h3>Annie Lakes</h3>
-										<div class="company">
-											<strong>Pet Sitter</strong>
-										</div>
-									</div>
-									<div class="location">
-										<i class="fa fa-map-marker"></i> London, UK
-									</div>
-									<ul class="meta">
-										<li class="date">
-											Posted 2 months ago
-										</li>
-									</ul>
-								</a>
-							</li>
-							<li class="job_listing">
-								<a href="#">
-									<img src="http://placehold.it/58x58" alt="" class="company_logo">
-									<div class="position">
-										<h3>James Smith</h3>
-										<div class="company">
-											<strong>Dog Walker</strong>
-										</div>
-									</div>
-									<div class="location">
-										<i class="fa fa-map-marker"></i> Melbourne, AU
-									</div>
-									<ul class="meta">
-										<li class="date">
-											Posted 2 months ago
-										</li>
-									</ul>
-								</a>
-							</li>
-							<li class="job_listing">
-								<a href="#">
-									<img src="http://placehold.it/58x58" alt="" class="company_logo">
-									<div class="position">
-										<h3>Ashly Gray</h3>
-										<div class="company">
-											<strong>Cat Sitter</strong>
-										</div>
-									</div>
-									<div class="location">
-										<i class="fa fa-map-marker"></i> New York, US
-									</div>
-									<ul class="meta">
-										<li class="date">
-											Posted 2 months ago
-										</li>
-									</ul>
-								</a>
-							</li>
-							<li class="job_listing">
-								<a href="#">
-									<img src="http://placehold.it/58x58" alt="" class="company_logo">
-									<div class="position">
-										<h3>Timothy Green</h3>
-										<div class="company">
-											<strong>Dog Walker</strong>
-										</div>
-									</div>
-									<div class="location">
-										<i class="fa fa-map-marker"></i> London, UK
-									</div>
-									<ul class="meta">
-										<li class="date">
-											Posted 2 months ago
-										</li>
-									</ul>
-								</a>
-							</li>
 						</ul>
 					</div>
 

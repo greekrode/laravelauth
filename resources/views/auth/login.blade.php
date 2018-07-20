@@ -34,9 +34,9 @@
                             <h3>Login</h3>
                             <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
                                 @csrf
-                                @if(session()->has('message'))
+                                @if(session()->has('success'))
                                     <div class="alert alert-success">
-                                    {{ session()->get('message') }}
+                                    {{ session()->get('success') }}
                                     </div>
                                 @endif
 

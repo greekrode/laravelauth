@@ -21,8 +21,23 @@ class JobController extends Controller
     public function index()
     {   
         $jobs = Job::all();
+        // $today = Carbon::today('Asia/Jakarta');
+        // $diff = $today->diffInHours($job->created_at);
+        // if ($diff > 24){
+        //     $diff = $today->diffInDays($job->created_at).' days';
+        // }else{
+        //     if ($today->diffInMinutes($job->created_at) > 60 ){
+        //         $diff = $diff.' hours';
+        //     }else{
+        //         $diff = $today->diffInMinutes($job->created_at).' minutes';
+        //     }
+        // }
 
-        return view('pages.job_list')->with('jobs', $jobs);
+        $data = [
+            'jobs' => $jobs,
+        ];
+
+        return view('pages.job_list')->with($data);
     }
 
     /**
@@ -85,6 +100,8 @@ class JobController extends Controller
                 }
             }
         }
+
+        return redirect('/job')->with('message', 'You have successfully added a new endorsement.');
     }
 
     /**

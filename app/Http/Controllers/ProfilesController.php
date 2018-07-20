@@ -386,7 +386,7 @@ class ProfilesController extends Controller
         $user->save();
 
         // Send Goodbye email notification
-        $this->sendGoodbyEmail($user, $user->token);
+        // $this->sendGoodbyEmail($user, $user->token);
 
         // Soft Delete User
         $user->delete();

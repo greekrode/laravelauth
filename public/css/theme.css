@@ -474,6 +474,7 @@ body.bg1 {
   transition: none;
   padding-left: 0;
   list-style: none;
+  transform-style: preserve-3d; 
   -webkit-transform-style: preserve-3d;
   overflow: hidden;
   margin: 0 auto;
@@ -2685,6 +2686,23 @@ body.bg1 {
   text-decoration: underline;
   color: #DC4124;
 }
+
+/* Card */
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 100%;
+  margin-bottom:4vh;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.card .container {
+  padding: 16px 16px;
+}
+
 /* Copyright */
 .footer-copyright {
   background: #2e2e2e;

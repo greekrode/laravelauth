@@ -65,6 +65,10 @@ Route::group(['middleware' => ['auth', 'activated', 'currentUser', 'activity', '
 
     Route::resource('job','JobController');
 
+    Route::resource('bid','BidController');
+
+    Route::resource('endorsement','EndorsementController');
+
     // User Profile and Account Routes
     Route::resource(
         'profile',
