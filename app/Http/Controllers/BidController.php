@@ -88,6 +88,28 @@ class BidController extends Controller
         return Job::find($id)->firstOrFail();
     }
 
+    public function accept(Request $request, $id){
+        $bid = Bid::find($id);
+
+        if ($bid){
+            $bid->accept = 1;
+            $bid->save();
+            $message = 'Bid by '.$bid->user->name.' has been accepted';
+            return redirect('bid/'.$request->job_id)->with('message', $message);
+        }else{
+            $message = 'Bid by'.$bid->user->name.' is unable to be accepted';
+            return redirect('bid/'.$request->job_id)->with('message', $message);
+        }
+    }
+
+    public function reject(Request $request, $id){
+
+    }
+
+    public function done(Request $request, $id){
+
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

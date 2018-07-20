@@ -107,6 +107,23 @@ Route::group(['middleware' => ['auth', 'activated', 'currentUser', 'activity', '
 
     // Route to upload user avatar.
     Route::post('avatar/upload', ['as' => 'avatar.upload', 'uses' => 'ProfilesController@upload']);
+
+    //Route for bidding
+    Route::post('bid/{id}/accept', [
+        'as' => '{id}',
+        'uses' => 'BidController@accept'
+    ]);
+
+    Route::post('bid/{id}/reject', [
+        'as' => '{id}',
+        'uses' => 'BidController@reject'
+    ]);
+
+    Route::post('bid/{id}/done', [
+        'as' => '{id}',
+        'uses' => 'BidController@done'
+    ]);
+
 });
 
 // Registered, activated, and is admin routes.

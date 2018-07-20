@@ -35,7 +35,7 @@
 							<div class="search_jobs">
 								<div class="search_keywords">
 									<label for="search_keywords">Keywords</label>
-									<input type="text" name="search_keywords" id="search_keywords" placeholder="All Pet Sitters" class="form-control" value="" />
+									<input type="text" name="search_keywords" id="search_keywords" placeholder="Endorsement Title" class="form-control" value="" />
 								</div>
 
 								<div class="search_location">
@@ -44,13 +44,13 @@
 								</div>
 
 								<div class="search_type">
-									<label>Service</label>
+									<label>Category</label>
 									<span class="select-style">
 										<select class="form-control">
-											<option>All Services</option>
-											<option>Pet Feeding</option>
+											<option>All Category</option>
+											{{-- <option>Pet Feeding</option>
 											<option>Dog Walking</option>
-											<option>Cat Feeding</option>
+											<option>Cat Feeding</option> --}}
 										</select>
 									</span>
 								</div>
@@ -70,7 +70,7 @@
 									<div class="position">
 										<h2>{{ $job->title }}</h3>
 										<div class="company">
-											<strong>{!! nl2br($job->description) !!}</strong>
+											<strong>{{ str_limit($job->description, 100) }}</strong>
 										</div>
 									</div>
 									<div class="location">

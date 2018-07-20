@@ -94,11 +94,15 @@
                                 <div class="col-md-4">
                                     @if($job->user_id == Auth::user()->id)
                                         {{-- <button href="{{ route('job.edit') }}" class="btn btn-success btn-md" onclick="showBid()" id="endorse"><span class="fa fa-check"></span> Endorse this</button> --}}
-                                        {!! HTML::icon_link(URL::to('/job/'.$job->id.'/edit'), 'fa fa-fw fa-cog', 'Edit endorsement', array('class' => 'btn btn-md btn-info')) !!}
-                                        <div class="spacer-lg"></div>
+                                        {!! HTML::icon_link(URL::to('/job/'.$job->id.'/edit'), 'fa fa-fw fa-cog', 'Edit endorsement', array('class' => 'btn btn-md btn-success')) !!}
+                                        <div class="spacer"></div>
                                         {!! HTML::icon_link(URL::to('/job/'.$job->id.'/destroy'), 'fa fa-fw fa-trash', 'Delete endorsement', array('class' => 'btn btn-md btn-danger')) !!}
+                                        <div class="spacer"></div>
+                                        {!! HTML::icon_link(URL::to('/bid/'.$job->id), 'fa fa-fw fa-eye', 'View Bidder', array('class' => 'btn btn-md btn-warning')) !!}
                                     @else
-                                        <button href="" class="btn btn-success btn-md" onclick="showBid()" id="endorse"><span class="fa fa-check"></span> Endorse this</button>
+                                        @if($bid == null)
+                                            <button href="" class="btn btn-success btn-md" onclick="showBid()" id="endorse"><span class="fa fa-check"></span> Endorse this</button>
+                                        @endif
                                     @endif
                                 </div>
                             </div>

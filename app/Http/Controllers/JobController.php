@@ -10,6 +10,7 @@ use Auth;
 use App\Models\User;
 use App\Models\Profile;
 use Carbon\Carbon;
+use App\Models\Bid;
 
 class JobController extends Controller
 {
@@ -117,6 +118,7 @@ class JobController extends Controller
             $user = $this->getUserById($job->user_id);
             $photos = Photo::where('endorsement_id', $job->id)
                         ->get();
+            $bid = $this->getUserById(Auth::user()->id);
         } catch (ModelNotFoundException $exception) {
             abort(404);
         }
@@ -133,14 +135,16 @@ class JobController extends Controller
             }
         }
 
+        
+
         $data = [
             'job' => $job,
             'photos' => $photos,
             'user' => $user,
             'diff' => $diff,
+            'bid' => $bid,
         ];
 
-        // dd($photos);
 
         return view ('pages.job_profile')->with($data);
     }
@@ -153,6 +157,11 @@ class JobController extends Controller
     public function getJobById($id)
     {
         return Job::find($id)->firstOrFail();
+    }
+
+    public function getBidById($id)
+    {
+        return Bid::where('user_id', $id)->first();
     }
 
     /**
