@@ -25,7 +25,7 @@
                             <li><a href="/register"><i class="fa-pencil-square-o fa"></i> Register</a></li>
                             <li><a href="/login"><i class="fa-lock fa"></i> Login</a></li>
                         @else
-                            <li><a href="{{ url('/home') }}">Bid Status</a></li>
+                            <li><a href="{{ url('bid_status/'.Auth::user()->id) }}">Bid Status</a></li>
                             <li><a class="{{ Request::is('profile/'.Auth::user()->name, 'profile/'.Auth::user()->name . '/edit') ? 'active' : null }}" href="{{ url('/profile/'.Auth::user()->name) }}">
                                 @lang('titles.profile')
                             </a></li>
@@ -91,11 +91,11 @@
                             <li><a href="page-faqs.html">FAQs</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">Features</a>
+                    {{-- <li><a href="#">Features</a>
                         <ul>
                             <li><a href="features-pricing-tables.html">Pricing Tables</a></li>
                         </ul>
-                    </li>
+                    </li> --}}
                     <li><a href="#">Influencers</a>
                         <ul>
                             <li><a href="/post_profile">Post a Profile</a></li>
@@ -104,7 +104,7 @@
                             <li><a href="job-profile.html">Profile</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">Business Owners</a>
+                    <li><a href="#">Endorsement</a>
                         <ul>
                             <li><a href="/job/create">Post an Endorsement</a></li>
                             <li><a href="job-list.html">Endorsement List</a></li>
@@ -112,14 +112,14 @@
                             {{-- <li><a href="job-profile.html">Profile</a></li> --}}
                         </ul>
                     </li>
-                    <li><a href="blog-right-sidebar.html">Blog</a>
+                    {{-- <li><a href="blog-right-sidebar.html">Blog</a>
                         <ul>
                             <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
                             <li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
                             <li><a href="blog-fullwidth.html">Blog Full Width</a></li>
                             <li><a href="blog-post.html">Single Post</a></li>
                         </ul>
-                    </li>
+                    </li> --}}
                     <li><a href="contacts.html">Contacts</a></li>
                 @else (Route::currentRouteName() == "login" )
                 <li><a href="/">Home</a></li>
@@ -130,11 +130,11 @@
                         <li><a href="page-faqs.html">FAQs</a></li>
                     </ul>
                 </li>
-                <li><a href="#">Features</a>
+                {{-- <li><a href="#">Features</a>
                     <ul>
                         <li><a href="features-pricing-tables.html">Pricing Tables</a></li>
                     </ul>
-                </li>
+                </li> --}}
                 <li><a href="#">Influencers</a>
                     <ul>
                         <li><a href="/post_profile">Post a Profile</a></li>
@@ -143,21 +143,24 @@
                         <li><a href="job-profile.html">Profile</a></li>
                     </ul>
                 </li>
-                <li><a href="#">Business Owners</a>
+                <li><a href="#">Endorsement</a>
                     <ul>
                         <li><a href="/job/create">Post an Endorsement</a></li>
                         <li><a href="/job">Endorsement List</a></li>
                         <li><a href="/bid">Dashboard</a></li>
                     </ul>
                 </li>
-                <li><a href="blog-right-sidebar.html">Blog</a>
+                <li>
+                    <a href="{{ url('payment') }}">Payment</a>
+                </li>
+                {{-- <li><a href="blog-right-sidebar.html">Blog</a>
                     <ul>
                         <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
                         <li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
                         <li><a href="blog-fullwidth.html">Blog Full Width</a></li>
                         <li><a href="blog-post.html">Single Post</a></li>
                     </ul>
-                </li>
+                </li> --}}
                 <li><a href="contacts.html">Contacts</a></li>
                 @endif
             </ul>

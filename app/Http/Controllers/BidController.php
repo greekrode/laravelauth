@@ -7,6 +7,7 @@ use App\Models\Job;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Auth;
+use App\Models\Payment;
 
 class BidController extends Controller
 {
@@ -19,6 +20,7 @@ class BidController extends Controller
     {
         $jobs = Job::where('user_id',Auth::user()->id)->get();
         $bids = Bid::all();
+
         $data = [
             'jobs' => $jobs,
             'bids' => $bids,
@@ -72,13 +74,15 @@ class BidController extends Controller
     {
         $job = $this->getJobById($id);
         $bids = Bid::where('job_id',$job->id)->get();
+        foreach ($bids as $bid){
+            $payments = Payment::where('bid_id',$bid->id)->get();
+        }
 
         $data = [
             'job' => $job,
             'bids' => $bids,
+            'payments' => $payments,
         ];
-
-        // dd($bids['1']->user->profile);
 
         return view('pages.bidder')->with($data);
     }
@@ -94,7 +98,7 @@ class BidController extends Controller
         if ($bid){
             $bid->accept = 1;
             $bid->save();
-            $message = 'Bid by '.$bid->user->name.' has been accepted';
+            $message = 'Bid by '.$bid->user->name.' has been accepted. Please make and verify your payment in 3 x 24 hours before the bidder will endorse.';
             return redirect('bid/'.$request->job_id)->with('message', $message);
         }else{
             $message = 'Bid by'.$bid->user->name.' is unable to be accepted';
@@ -103,11 +107,75 @@ class BidController extends Controller
     }
 
     public function reject(Request $request, $id){
+        $bid = Bid::find($id);
 
+        if ($bid){
+            $bid->reject = 1;
+            $bid->save();
+            $message = 'Bid by '.$bid->user->name.' has been rejected';
+            return redirect('bid/'.$request->job_id)->with('message', $message);
+        }else{
+            $message = 'Bid by'.$bid->user->name.' is unable to be rejected';
+            return redirect('bid/'.$request->job_id)->with('message', $message);
+        }
     }
 
     public function done(Request $request, $id){
+        $bid = Bid::find($id);
 
+        if ($bid){
+            $bid->done = 1;
+            $bid->accept = 0;
+            $bid->save();
+            $message = 'Bid by '.$bid->user->name.' is done';
+            return redirect('bid/'.$request->job_id)->with('message', $message);
+        }else{
+            $message = 'Bid by'.$bid->user->name.' is unable to be marked done';
+            return redirect('bid/'.$request->job_id)->with('message', $message);
+        }
+    }
+
+    public function cancel(Request $request, $id){
+        $bid = Bid::find($id);
+
+        if ($bid){
+            $bid->cancel = 1;
+            $bid->save();
+            $message = 'Bid by '.$bid->user->name.' has been cancelled';
+            return redirect('bid/'.$request->job_id)->with('message', $message);
+        }else{
+            $message = 'Bid by'.$bid->user->name.' is unable to be cancelled';
+            return redirect('bid/'.$request->job_id)->with('message', $message);
+        }
+    }
+
+    public function bid_status($id)
+    {
+        $user = $this->getUserById($id);
+        $bids = Bid::where('user_id',$id)->get();
+        if (count($bids) > 0){
+            foreach ($bids as $bid){
+                $jobs = Job::whereId($bid->id)->get();
+                $payments = Payment::where('bid_id',$bid->id)->get();
+            }
+        }else{
+            $jobs = '';
+        }
+
+        $data = [
+            'user' => $user,
+            'bids' => $bids,
+            'jobs' => $jobs,
+            'payments' => $payments,
+        ];
+
+        return view('pages.bid_status')->with($data);
+        
+    }
+
+    public function getUserById($id)
+    {
+        return User::find($id)->firstOrFail();
     }
 
     /**

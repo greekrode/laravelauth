@@ -100,9 +100,7 @@
                                         <div class="spacer"></div>
                                         {!! HTML::icon_link(URL::to('/bid/'.$job->id), 'fa fa-fw fa-eye', 'View Bidder', array('class' => 'btn btn-md btn-warning')) !!}
                                     @else
-                                        @if($bid == null)
-                                            <button href="" class="btn btn-success btn-md" onclick="showBid()" id="endorse"><span class="fa fa-check"></span> Endorse this</button>
-                                        @endif
+                                        <button href="" class="btn btn-success btn-md" onclick="showBid()" id="endorse"><span class="fa fa-check"></span> Endorse this</button>
                                     @endif
                                 </div>
                             </div>

@@ -9,10 +9,8 @@
 									<div class="widget-content">
 										<ul>
 											<li><a href="#">FAQ’s</a></li>
-											<li><a href="#">Press</a></li>
 											<li><a href="#">Testimonials</a></li>
 											<li><a href="#">About Us</a></li>
-											<li><a href="#">Expert Advice</a></li>
 											<li><a href="#">Contact Us</a></li>
 										</ul>
 									</div>
@@ -102,7 +100,7 @@
 					<div class="container">
 						<div class="row">
 							<div class="col-sm-6 col-md-4">
-								Copyright &copy; 2014  <a href="/">NinePheme</a> &nbsp;| &nbsp;All Rights Reserved
+								Copyright &copy; 2018  <a href="/">NinePheme</a> &nbsp;| &nbsp;All Rights Reserved
 							</div>
 							<div class="col-sm-6 col-md-8">
 								<div class="social-links-wrapper">
@@ -112,7 +110,6 @@
 										<li><a href="#"><i class="fa fa-twitter"></i></a></li>
 										<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
 										<li><a href="#"><i class="fa fa-instagram"></i></a></li>
-										<li><a href="#"><i class="fa fa-rss"></i></a></li>
 									</ul>
 								</div>
 							</div>

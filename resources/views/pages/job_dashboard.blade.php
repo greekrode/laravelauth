@@ -27,10 +27,12 @@
                 
 
                 <div id="job-manager-job-dashboard">
-                    {{-- <div class="alert alert-info alert-dismissable">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true"><i class="fa fa-times"></i></button>
-                        Your endorsement listings are shown in the table below. Expired listings will be automatically removed after 30 days.
-                    </div> --}}
+                        @if(session()->has('message'))
+                        <div class="alert alert-info alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true"><i class="fa fa-times"></i></button>
+                            {{ session()->get('message') }}
+                        </div>
+                        @endif
 
                     <div class="table-responsive">
                         <table class="job-manager-jobs table table-bordered table-striped">

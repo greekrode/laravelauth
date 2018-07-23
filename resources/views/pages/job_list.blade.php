@@ -95,7 +95,7 @@
 
 					<div class="row">
 						<div class="col-md-4 col-md-offset-4">
-							<a class="load_more_jobs btn btn-default" href="#">Load more job listings</a>
+							<a class="load_more_jobs btn btn-default" href="#">Load more endorsements</a>
 						</div>
 					</div>
 

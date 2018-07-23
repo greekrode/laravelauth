@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBidsTable extends Migration
+class CreatePaymentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,21 @@ class CreateBidsTable extends Migration
      */
     public function up()
     {
-        Schema::create('bids', function (Blueprint $table) {
+        Schema::create('payments', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('bid_id')->unsigned();
+            $table->foreign('bid_id')->references('id')->on('bids')->onDelete('cascade');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->integer('expected');
-            $table->text('description');
             $table->integer('job_id')->unsigned();
             $table->foreign('job_id')->references('id')->on('jobs')->onDelete('cascade');
-            $table->integer('accept')->default(0);
-            $table->integer('reject')->default(0);
-            $table->integer('done_owner')->default(0);
-            $table->integer('done_influencer')->default(0);
+            $table->string('bank_name');
+            $table->string('account_name');
+            $table->integer('account_number');
+            $table->date('payment_date');
+            $table->integer('amount');
+            $table->text('remarks');
+            $table->string('photo');
             $table->timestamps();
         });
     }
@@ -36,6 +39,6 @@ class CreateBidsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bids');
+        Schema::dropIfExists('payments');
     }
 }

@@ -124,6 +124,22 @@ Route::group(['middleware' => ['auth', 'activated', 'currentUser', 'activity', '
         'uses' => 'BidController@done'
     ]);
 
+    Route::post('bid/{id}/cancel', [
+        'as' => '{id}',
+        'uses' => 'BidController@cancel'
+    ]);
+
+    Route::get('bid_status/{id}', [
+        'as' => '{id}',
+        'uses' => 'BidController@bid_status'
+    ]);
+
+    //Route for payment
+
+    Route::resource('payment','PaymentController');
+
+    Route::get('payment/{bid_id}/{job_id}','PaymentController@show');
+
 });
 
 // Registered, activated, and is admin routes.
