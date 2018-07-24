@@ -24,6 +24,18 @@
                         @if(Auth::guest())
                             <li><a href="/register"><i class="fa-pencil-square-o fa"></i> Register</a></li>
                             <li><a href="/login"><i class="fa-lock fa"></i> Login</a></li>
+                        @elseif(Auth::user()->isAdmin())
+                            <li><a href="{{ url('home') }}">Admin</a></li>
+                            <li>
+                                <a href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                              document.getElementById('logout-form').submit();">
+                                 {{ __('Logout') }}
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </li>
                         @else
                             <li><a href="{{ url('bid_status/'.Auth::user()->id) }}">Bid Status</a></li>
                             <li><a class="{{ Request::is('profile/'.Auth::user()->name, 'profile/'.Auth::user()->name . '/edit') ? 'active' : null }}" href="{{ url('/profile/'.Auth::user()->name) }}">

@@ -26,4 +26,9 @@ class Bid extends Model
     {
         return $this->belongsTo('App\Models\User');
     }
+
+    public function payment()
+    {
+        return $this->hasOne('App\Models\Payment');
+    }
 }

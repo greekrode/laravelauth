@@ -25,4 +25,14 @@ class Payment extends Model
         'id'
     ];
 
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
+
+    public function job()
+    {
+        return $this->belongsTo('App\Models\Job');
+    }
+
 }

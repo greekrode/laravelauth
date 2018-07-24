@@ -53,27 +53,21 @@
                                                 <a href="{!! URL::to('/job/'.$job->id) !!}" class="job_title_link">{{ $job->title }}</a>
                                             @endif
                                         @endforeach
-                                        <ul class="job-dashboard-actions">                      
-                                            @if($bid->reject == 0 && $bid->accept == 0 && $bid->done_influencer == 0)
-                                            <li><a href="{{ $bid->id.'/reject' }}" 
-                                                    class="job-dashboard-action-edit"
-                                                    onclick="event.preventDefault();
-                                                    document.getElementById('rejec').submit();">Reject</a></li>
-                                                    <form id="reject" action="{{ $bid->id.'/reject' }}" method="POST" style="display: none;">
-                                                        @csrf
-                                                        <input type="hidden" value="{{ $job->id }}" name="job_id" id="job_id">
-                                                    </form>
-                                            @endif
+                                        <ul class="job-dashboard-actions">                          
                                             
                                             @if($bid->done_influencer == 0 && $bid->accept == 1) 
-                                            <li><a href="{{ url('bid/'.$bid->id.'/done_influencer') }}" 
-                                                class="job-dashboard-action-edit"
-                                                onclick="event.preventDefault();
-                                                document.getElementById('done').submit();">Done</a></li>
-                                                    <form id="done" action="{{ url('bid/'.$bid->id.'/done_influencer') }}" method="POST" style="display: none;">
-                                                        @csrf
-                                                        <input type="hidden" value="{{ $job->id }}" name="job_id" id="job_id">
-                                                    </form>
+                                                @if($bid->id == $bid->payment->bid_id)
+                                                    @if($bid->payment->accept == 1)
+                                                    <li><a href="{{ url('bid/'.$bid->id.'/done_influencer') }}" 
+                                                        class="job-dashboard-action-edit"
+                                                        onclick="event.preventDefault();
+                                                        document.getElementById('done').submit();">Done</a></li>
+                                                            <form id="done" action="{{ url('bid/'.$bid->id.'/done_influencer') }}" method="POST" style="display: none;">
+                                                                @csrf
+                                                                <input type="hidden" value="{{ $job->id }}" name="job_id" id="job_id">
+                                                            </form>
+                                                    @endif
+                                                @endif
                                             @endif
                                         </ul>
                                     </td>

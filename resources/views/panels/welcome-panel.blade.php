@@ -29,7 +29,7 @@
         <h2 class="lead">
             {{ trans('auth.loggedIn') }}
         </h2>
-        <p>
+        {{-- <p>
             <em>Thank you</em> for checking this project out. <strong>Please remember to star it!</strong>
         </p>
         <p>
@@ -37,7 +37,7 @@
         </p>
         <p>
             This page route is protected by <code>activated</code> middleware. Only accounts with activated emails are able pass this middleware.
-        </p>
+        </p> --}}
         <p>
             <small>
                 Users registered via Social providers are by default activated.

@@ -28,6 +28,8 @@ class CreatePaymentsTable extends Migration
             $table->integer('amount');
             $table->text('remarks');
             $table->string('photo');
+            $table->integer('reject')->default(0);
+            $table->integer('accept')->default(0);
             $table->timestamps();
         });
     }

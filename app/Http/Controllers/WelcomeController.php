@@ -22,8 +22,7 @@ class WelcomeController extends Controller
                 ->orderBy('users.created_at','desc')
                 ->take('4')
                 ->get();
- 
-
+        
         return view('welcome')->with('users',$users);
     }
 }

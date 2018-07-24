@@ -152,9 +152,62 @@
                                                                 <span class="help-block">
                                                                     <strong>{{ $errors->first('facebook_username') }}</strong>
                                                                 </span>
+                                                                @endif
+                                                            </div>
+                                                        </div>
+
+                                                    <div class="form-group has-feedback {{ $errors->has('bank_name') ? ' has-error ' : '' }}">
+                                                        {!! Form::label('bank_name', 'Bank Name' , array('class' => 'col-12 control-label')); !!}
+                                                        <div class="col-12">
+                                                            {!! Form::text('bank_name', old('bank_name'), array('id' => 'bank_name', 'class' => 'form-control', 'placeholder' => 'Enter your bank name')) !!}
+                                                            <span class="glyphicon glyphicon-pencil form-control-feedback" aria-hidden="true"></span>
+                                                            @if ($errors->has('bank_name'))
+                                                                <span class="help-block">
+                                                                    <strong>{{ $errors->first('bank_name') }}</strong>
+                                                                </span>
                                                             @endif
                                                         </div>
                                                     </div>
+
+                                                    <div class="form-group has-feedback {{ $errors->has('account_number') ? ' has-error ' : '' }}">
+                                                        {!! Form::label('account_number', 'Account Number' , array('class' => 'col-12 control-label')); !!}
+                                                        <div class="col-12">
+                                                            {!! Form::text('account_number', old('account_number'), array('id' => 'account_number', 'class' => 'form-control', 'placeholder' => 'Enter your account number')) !!}
+                                                            <span class="glyphicon glyphicon-pencil form-control-feedback" aria-hidden="true"></span>
+                                                            @if ($errors->has('account_number'))
+                                                                <span class="help-block">
+                                                                    <strong>{{ $errors->first('account_number') }}</strong>
+                                                                </span>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group has-feedback {{ $errors->has('account_name') ? ' has-error ' : '' }}">
+                                                        {!! Form::label('account_name', 'Account Name' , array('class' => 'col-12 control-label')); !!}
+                                                        <div class="col-12">
+                                                            {!! Form::text('account_name', old('account_name'), array('id' => 'account_name', 'class' => 'form-control', 'placeholder' => 'Enter your account name')) !!}
+                                                            <span class="glyphicon glyphicon-pencil form-control-feedback" aria-hidden="true"></span>
+                                                            @if ($errors->has('account_name'))
+                                                                <span class="help-block">
+                                                                    <strong>{{ $errors->first('account_name') }}</strong>
+                                                                </span>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group has-feedback {{ $errors->has('id_picture') ? ' has-error ': '' }}">
+                                                        {!! Form::label('id_picture', 'ID Picture' , array('class' => 'col-12 control-label')); !!}
+                                                        <div class="col-12">
+                                                            {!! Form::file('id_picture', array('id' => 'id_picture', 'class' => 'form-control')) !!}
+                                                            <span class="glyphicon glyphicon-pencil form-control-feedback" aria-hidden="true"></span>
+                                                            @if ($errors->has('id_picture'))
+                                                                <span class="help-block">
+                                                                    <strong>{{ $errors->first('id_picture') }}</strong>
+                                                                </span>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+
                                                     <div class="form-group">
                                                         <div class="col-12 offset-sm-4">
                                                             {!! Form::button(

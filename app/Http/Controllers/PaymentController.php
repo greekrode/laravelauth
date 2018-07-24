@@ -7,7 +7,13 @@ use App\Models\Job;
 use App\Models\Bid;
 use App\Models\Profile;
 use App\Models\User;
+use App\Traits\CaptureIpTrait;
+use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use jeremykenedy\LaravelRoles\Models\Role;
+use Validator;
+use Storage;
 
 class PaymentController extends Controller
 {
@@ -18,7 +24,22 @@ class PaymentController extends Controller
      */
     public function index()
     {
+        $pagintaionEnabled = config('usersmanagement.enablePagination');
+        if ($pagintaionEnabled) {
+            $payments = Payment::paginate(config('usersmanagement.paginateListSize'));
+        } else {
+            $payments = Payment::all();
+        }
         
+
+        return view('pages.admin.payment', compact('payments'));
+    }
+
+    public function download($id)
+    {
+        $payment = Payment::whereId($id)->first();
+
+        return Storage::download($payment->photo);
     }
 
     /**
@@ -81,6 +102,34 @@ class PaymentController extends Controller
         // dd($data);
 
         return view('pages.payment')->with($data);
+    }
+
+    public function payment_reject($id){
+        $payment = Payment::whereId($id)->first();
+
+        if ($payment){
+            $payment->reject = 1;
+            $payment->save();
+            $message = 'Payment number '.$id.' has been rejected.';
+            return redirect('payment')->with('message', $message);
+        }else{
+            $message = 'Payment number '.$id.' is unable to be rejected.';
+            return redirect('payment')->with('message', $message);
+        }    
+    }
+
+    public function payment_accept($id){
+        $payment = Payment::whereId($id)->first();
+
+        if ($payment){
+            $payment->accept = 1;
+            $payment->save();
+            $message = 'Payment number '.$id.' has been accepted.';
+            return redirect('payment')->with('message', $message);
+        }else{
+            $message = 'Payment number '.$id.' is unable to be accepted.';
+            return redirect('payment')->with('message', $message);
+        }    
     }
 
     /**

@@ -173,6 +173,19 @@ Route::group(['middleware' => ['auth', 'activated', 'role:admin', 'activity', 't
         ],
     ]);
 
+    Route::get('payment','PaymentController@index');
+    Route::get('payment_download/{id}','PaymentController@download');
+
+    Route::post('payment/{id}/payment_reject', [
+        'as' => '{id}',
+        'uses' => 'PaymentController@payment_reject'
+    ]);
+
+    Route::post('payment/{id}/payment_accept', [
+        'as' => '{id}',
+        'uses' => 'PaymentController@payment_accept'
+    ]);
+
     Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
     Route::get('routes', 'AdminDetailsController@listRoutes');
     Route::get('active-users', 'AdminDetailsController@activeUsers');

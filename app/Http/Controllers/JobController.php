@@ -113,6 +113,7 @@ class JobController extends Controller
      */
     public function show($id)
     {
+
         try {
             $job = $this->getJobById($id);
             $user = $this->getUserById($job->user_id);
@@ -145,7 +146,6 @@ class JobController extends Controller
             'bid' => $bid,
         ];
 
-
         return view ('pages.job_profile')->with($data);
     }
 
@@ -156,7 +156,7 @@ class JobController extends Controller
 
     public function getJobById($id)
     {
-        return Job::find($id)->firstOrFail();
+        return Job::whereId($id)->firstOrFail();
     }
 
     public function getBidById($id)

@@ -21,6 +21,10 @@
                                 @lang('titles.adminUserList')
                             </a>
                             <div class="dropdown-divider"></div>
+                            <a class="dropdown-item {{ Request::is('payment')  ? 'active' : null}}" href="{{ url('/payment') }}">
+                                Payment
+                            </a>
+                            <div class="dropdown-divider"></div>
                             <a class="dropdown-item {{ Request::is('users/create') ? 'active' : null }}" href="{{ url('/users/create') }}">
                                 @lang('titles.adminNewUser')
                             </a>

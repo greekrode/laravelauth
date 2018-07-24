@@ -25,9 +25,13 @@ class CreateProfilesTable extends Migration
             $table->string('followers')->nullable();
             $table->string('following')->nullable();
             $table->string('twitter_username')->nullable();
-            $table->string('facebook_username')->nullable();
-            $table->string('avatar')->nullable();
+            $table->string('facebook_username')->nullable();        
+            $table->text('avatar')->nullable();
             $table->boolean('avatar_status')->default(0);
+            $table->string('account_name')->nullable();
+            $table->string('account_number')->nullable();
+            $table->string('bank_name')->nullable();
+            $table->string('id_picture')->nullable();
             $table->timestamps();
         });
     }

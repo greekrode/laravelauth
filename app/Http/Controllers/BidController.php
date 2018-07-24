@@ -51,16 +51,20 @@ class BidController extends Controller
             'description' => 'required',
             'expected' => 'required'
         ]);
+        
+        $user = User::find($request->user_id);
+        if ($user->id_picture && $user->bank_account){
+            $bid = Bid::create([
+                'user_id' => $request->user_id,
+                'job_id' => $request->job_id,
+                'description' => $request->description,
+                'expected' => $request->expected
+            ]);
 
-        $bid = Bid::create([
-            'user_id' => $request->user_id,
-            'job_id' => $request->job_id,
-            'description' => $request->description,
-            'expected' => $request->expected
-        ]);
-
-        return redirect('job/'.$request->job_id)->with('message', 'You have successfully bid on this project');
-
+            return redirect('job/'.$request->job_id)->with('message', 'You have successfully bid on this project');
+        }else{
+            return redirect('job/'.$request->job_id)->with('message', 'You must complete your account before bidding !');
+        }
 
     }
 
@@ -89,7 +93,7 @@ class BidController extends Controller
 
     public function getJobById($id)
     {
-        return Job::find($id)->firstOrFail();
+        return Job::whereId($id)->firstOrFail();
     }
 
     public function accept(Request $request, $id){
@@ -169,18 +173,16 @@ class BidController extends Controller
         $bids = Bid::where('user_id',$id)->get();
         if (count($bids) > 0){
             foreach ($bids as $bid){
-                $jobs = Job::whereId($bid->id)->get();
-                $payments = Payment::where('bid_id',$bid->id)->get();
+                $jobs = Job::find($bid->job_id)->get();
             }
         }else{
             $jobs = '';
         }
-
+        
         $data = [
             'user' => $user,
             'bids' => $bids,
             'jobs' => $jobs,
-            'payments' => $payments,
         ];
 
         return view('pages.bid_status')->with($data);
@@ -189,7 +191,7 @@ class BidController extends Controller
 
     public function getUserById($id)
     {
-        return User::find($id)->firstOrFail();
+        return User::whereId($id)->firstOrFail();
     }
 
     /**

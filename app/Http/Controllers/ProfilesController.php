@@ -206,8 +206,6 @@ class ProfilesController extends Controller
     {
         $user = $this->getUserByUsername($username);
 
-        $input = Input::only('theme_id', 'location', 'bio','business_type_id','twitter_username', 'facebook_username', 'avatar_status');
-
         $ipAddress = new CaptureIpTrait();
 
         $profile_validator = $this->profile_validator($request->all());
@@ -215,10 +213,18 @@ class ProfilesController extends Controller
         if ($profile_validator->fails()) {
             return back()->withErrors($profile_validator)->withInput();
         }
+        
+        if($request->hasFile('id_picture') ){
+            $photo = $request->file('id_picture');
+            $filename = $photo->store('photos');
+        }
+
+        $input = Input::only('theme_id', 'location', 'bio','business_type_id','twitter_username', 'facebook_username', 'avatar_status','bank_name','account_name','account_number');
 
         if ($user->profile == null) {
             $profile = new Profile();
             $profile->fill($input);
+            $profile->id_picture = $filename;
             $user->profile()->save($profile);
         } else {
             $user->profile->fill($input)->save();

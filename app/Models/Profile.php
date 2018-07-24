@@ -38,7 +38,11 @@ class Profile extends Model
         'avatar',
         'avatar_status',
         'followers',
-        'following'
+        'following',
+        'account_name',
+        'account_number',
+        'bank_name',
+        'id_picture',
     ];
 
     protected $casts = [
