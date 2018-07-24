@@ -150,7 +150,7 @@
                     <div class="spacer"></div>
 
                     <p>
-                        <input type="submit" name="submit_job" class="btn btn-primary" value="Submit Endorsement &rarr;" />
+                        <input type="submit" name="submit_job" class="btn btn-primary" value="Verify Payment &rarr;" />
                     </p>
 
                 </form>

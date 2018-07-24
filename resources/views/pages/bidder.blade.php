@@ -53,7 +53,7 @@
                                     <td class="job_title">
                                         <a href="{!! URL::to('/profile/'.$bid->user->name) !!}" class="job_title_link">{{ $bid->user->name }}</a>
                                         <ul class="job-dashboard-actions">
-                                            @if ($bid->accept == 0)
+                                            @if ($bid->accept == 0 && $bid->done_influencer == 0 && $bid->done_owner == 0 && $bid->reject == 0)
                                             <li><a href="{{ $bid->id.'/accept' }}" 
                                                 class="job-dashboard-action-edit"
                                                 onclick="event.preventDefault();
@@ -66,7 +66,7 @@
                                                 <li><a href="{{ url('payment/'.$bid->id.'/'.$job->id) }}" class="job-dashboard-action-edit">Verify Payment</a></li>
                                             @endif
                                             
-                                            @if($bid->reject == 0 && $bid->accept == 0)
+                                            @if($bid->reject == 0 && $bid->accept == 0 && $bid->done_owner == 0 && $bid->done_influencer == 0)
                                             <li><a href="{{ $bid->id.'/reject' }}" 
                                                     class="job-dashboard-action-edit"
                                                     onclick="event.preventDefault();
@@ -75,7 +75,7 @@
                                                         @csrf
                                                         <input type="hidden" value="{{ $job->id }}" name="job_id" id="job_id">
                                                     </form>
-                                            @elseif($bid->accept == 1 && $bid->reject == 0)
+                                            @elseif($bid->accept == 1 && $bid->reject == 0 && $bid->done_owner == 0 && $bid->done_influencer == 0)
                                             <li><a href="{{ $bid->id.'/cancel' }}" 
                                                     class="job-dashboard-action-edit"
                                                     onclick="event.preventDefault();
@@ -85,16 +85,20 @@
                                                         <input type="hidden" value="{{ $job->id }}" name="job_id" id="job_id">
                                                     </form>
                                             @endif
-
-                                            @if($bid->done == 0 && $bid->accept == 1 && $bid->reject == 0 && count($payments) > 0)
-                                            <li><a href="{{ $bid->id.'/done' }}" 
-                                                    class="job-dashboard-action-edit"
-                                                    onclick="event.preventDefault();
-                                                    document.getElementById('done').submit();">Done</a></li>
-                                                    <form id="done" action="{{ $bid->id.'/done' }}" method="POST" style="display: none;">
-                                                        @csrf
-                                                        <input type="hidden" value="{{ $job->id }}" name="job_id" id="job_id">
-                                                    </form>
+                                            
+                                            @if(count($payments) > 0)
+                                                @foreach($payments as $payment)
+                                                    @if($bid->done_influencer == 1 && $bid->accept == 1 && $bid->reject == 0 && $payment->bid_id == $bid->id && $bid->done_owner == 0)
+                                                    <li><a href="{{ $bid->id.'/done_owner' }}" 
+                                                            class="job-dashboard-action-edit"
+                                                            onclick="event.preventDefault();
+                                                            document.getElementById('done').submit();">Done</a></li>
+                                                            <form id="done" action="{{ $bid->id.'/done_owner' }}" method="POST" style="display: none;">
+                                                                @csrf
+                                                                <input type="hidden" value="{{ $job->id }}" name="job_id" id="job_id">
+                                                            </form>
+                                                    @endif
+                                                @endforeach
                                             @endif
                                         </ul>
                                     </td>
@@ -102,11 +106,11 @@
                                     <td class="filled">{!! nl2br($bid->description) !!}</td>
                                     <td class="filled">{{ $bid->expected.' days' }}</td>
                                     <td class="status">
-                                        @if($bid->accept == 1 && $bid->reject == 0 && $bid->done == 0)
+                                        @if($bid->accept == 1 && $bid->reject == 0 && $bid->done_owner == 0 && $bid->done_influencer == 0)
                                         Accepted
-                                        @elseif($bid->accept == 0 && $bid->reject == 1 && $bid->done == 0)
+                                        @elseif($bid->accept == 0 && $bid->reject == 1 && $bid->done_owner == 0 && $bid->done_influencer == 0)
                                         Rejected
-                                        @elseif($bid->accept == 0 && $bid->reject == 0 && $bid->done == 1)
+                                        @elseif($bid->accept == 1 && $bid->reject == 0 && $bid->done_owner == 1 && $bid->done_influencer == 1)
                                         Done
                                         @else
                                         &#45;

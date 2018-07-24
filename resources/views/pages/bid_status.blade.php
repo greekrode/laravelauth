@@ -54,7 +54,7 @@
                                             @endif
                                         @endforeach
                                         <ul class="job-dashboard-actions">                      
-                                            @if($bid->reject == 0 && $bid->accept == 0)
+                                            @if($bid->reject == 0 && $bid->accept == 0 && $bid->done_influencer == 0)
                                             <li><a href="{{ $bid->id.'/reject' }}" 
                                                     class="job-dashboard-action-edit"
                                                     onclick="event.preventDefault();
@@ -64,13 +64,13 @@
                                                         <input type="hidden" value="{{ $job->id }}" name="job_id" id="job_id">
                                                     </form>
                                             @endif
-
-                                            @if($bid->done == 0 && $bid->accept == 1)
-                                            <li><a href="{{ $bid->id.'/done' }}" 
-                                                    class="job-dashboard-action-edit"
-                                                    onclick="event.preventDefault();
-                                                    document.getElementById('done').submit();">Done</a></li>
-                                                    <form id="done" action="{{ $bid->id.'/done' }}" method="POST" style="display: none;">
+                                            
+                                            @if($bid->done_influencer == 0 && $bid->accept == 1) 
+                                            <li><a href="{{ url('bid/'.$bid->id.'/done_influencer') }}" 
+                                                class="job-dashboard-action-edit"
+                                                onclick="event.preventDefault();
+                                                document.getElementById('done').submit();">Done</a></li>
+                                                    <form id="done" action="{{ url('bid/'.$bid->id.'/done_influencer') }}" method="POST" style="display: none;">
                                                         @csrf
                                                         <input type="hidden" value="{{ $job->id }}" name="job_id" id="job_id">
                                                     </form>
@@ -81,11 +81,11 @@
                                     {{-- <td class="filled">{!! nl2br($bid->description) !!}</td>
                                     <td class="filled">{{ $bid->expected.' days' }}</td> --}}
                                     <td class="status">
-                                        @if($bid->accept == 1 && $bid->reject == 0 && $bid->done == 0)
-                                        Accepted 
-                                        @elseif($bid->accept == 0 && $bid->reject == 1 && $bid->done == 0)
+                                        @if($bid->accept == 1 && $bid->reject == 0 && $bid->done_owner == 0 && $bid->done_influencer == 0)
+                                        Accepted
+                                        @elseif($bid->accept == 0 && $bid->reject == 1 && $bid->done_owner == 0 && $bid->done_influencer == 0)
                                         Rejected
-                                        @elseif($bid->accept == 0 && $bid->reject == 0 && $bid->done == 1)
+                                        @elseif($bid->accept == 1 && $bid->reject == 0 && $bid->done_owner == 1 && $bid->done_influencer == 1)
                                         Done
                                         @else
                                         Pending

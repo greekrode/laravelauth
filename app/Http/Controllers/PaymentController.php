@@ -43,36 +43,23 @@ class PaymentController extends Controller
             foreach ($request->file('photos') as $photo){
                 $filename = $photo->store('photos');
             }
-
-
-            $payment = Payment::create([
-                'bid_id' => $request->bid_id,
-                'job_id' => $request->job_id,
-                'user_id' => $request->user_id,
-                'bank_name' => $request->bank_name,
-                'account_name' => $request->account_name,
-                'account_number' => $request->account_number,
-                'payment_date' => $request->payment_date,
-                'amount' => $request->amount,
-                'remarks' => $request->remarks,
-                'photo' => $filename,
-            ]);
         }
 
-        $job = Job::find($request->job_id)->firstOrFail();
-        $bids = Bid::where('job_id',$job->id)->get();
-        foreach ($bids as $bid){
-            $payments = Payment::where('bid_id',$bid->id)->get();
-        }
+        $payment = Payment::create([
+            'bid_id' => $request->bid_id,
+            'job_id' => $request->job_id,
+            'user_id' => $request->user_id,
+            'bank_name' => $request->bank_name,
+            'account_name' => $request->account_name,
+            'account_number' => $request->account_number,
+            'payment_date' => $request->payment_date,
+            'amount' => $request->amount,
+            'remarks' => $request->remarks,
+            'photo' => $filename,
+        ]);
 
-        $data = [
-            'job' => $job,
-            'bids' => $bids,
-            'payments' => $payments,
-            'message' => 'The payment verification for bid number '.$request->bid_id.' has been submitted',
-        ];
-
-        return view('pages.bidder')->with($data);
+        $message = 'The payment verification for bid number '.$request->bid_id.' has been submitted';
+        return redirect('bid/'.$request->job_id)->with('message', $message);
     }
 
     /**

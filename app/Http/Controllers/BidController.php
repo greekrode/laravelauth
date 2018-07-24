@@ -77,7 +77,7 @@ class BidController extends Controller
         foreach ($bids as $bid){
             $payments = Payment::where('bid_id',$bid->id)->get();
         }
-
+        
         $data = [
             'job' => $job,
             'bids' => $bids,
@@ -120,18 +120,32 @@ class BidController extends Controller
         }
     }
 
-    public function done(Request $request, $id){
+    public function done_owner(Request $request, $id){
         $bid = Bid::find($id);
 
         if ($bid){
-            $bid->done = 1;
-            $bid->accept = 0;
+            $bid->done_owner = 1;
             $bid->save();
             $message = 'Bid by '.$bid->user->name.' is done';
             return redirect('bid/'.$request->job_id)->with('message', $message);
         }else{
             $message = 'Bid by'.$bid->user->name.' is unable to be marked done';
             return redirect('bid/'.$request->job_id)->with('message', $message);
+        }
+    }
+
+    public function done_influencer(Request $request, $id){
+        $bid = Bid::find($id);
+        $job = Job::find($bid->job_id);
+        
+        if ($bid){
+            $bid->done_influencer = 1;
+            $bid->save();
+            $message = 'Bid for "'.$job->title.'" is marked as done. Please wait for the endorser to confirm it before you receive the payment.';
+            return redirect('bid_status/'.Auth::user()->id)->with('message', $message);
+        }else{
+            $message = 'Bid by'.$bid->user->name.' is unable to be marked done';
+            return redirect('bid_status/'.Auth::user()->id)->with('message', $message);
         }
     }
 

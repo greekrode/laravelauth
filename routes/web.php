@@ -119,9 +119,14 @@ Route::group(['middleware' => ['auth', 'activated', 'currentUser', 'activity', '
         'uses' => 'BidController@reject'
     ]);
 
-    Route::post('bid/{id}/done', [
+    Route::post('bid/{id}/done_owner', [
         'as' => '{id}',
-        'uses' => 'BidController@done'
+        'uses' => 'BidController@done_owner'
+    ]);
+
+    Route::post('bid/{id}/done_influencer', [
+        'as' => '{id}',
+        'uses' => 'BidController@done_influencer'
     ]);
 
     Route::post('bid/{id}/cancel', [
